@@ -7,4 +7,5 @@ script:
   - jdk_switcher use oraclejdk8
   - gradle check
 
-sudo: required
+before_install:
+ - chmod +x gradlew
