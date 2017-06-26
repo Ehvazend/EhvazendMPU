@@ -1,0 +1,21 @@
+.input-file-text {
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #efefef, #d9d9d9);
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+}
+
+.check-box > .box {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 2px;
+}
+
+.text {
+    -fx-font-family: 'Minecraft Rus';
+}
