@@ -23,8 +23,8 @@ class Main : Application() {
         primaryStage.scene = Scene(ROOT, 590.0, 240.0)
 
         // Scene parameters
-        primaryStage.scene.stylesheets.add(STYLE)
         Font.loadFont(FONT, 12.0)
+        primaryStage.scene.stylesheets.add(STYLE)
         primaryStage.icons.add(LOGO)
         primaryStage.title = TITLE
         primaryStage.isResizable = false
