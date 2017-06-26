@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.image.Image
-import javafx.scene.text.Font
 import javafx.stage.Stage
 import java.io.File
 
@@ -15,7 +14,6 @@ class Main : Application() {
 
         val ROOT = FXMLLoader.load<Parent>(javaClass.getResource(MODE.ROOT))
         val STYLE = javaClass.getResource(MODE.STYLE).toString()
-        val FONT = javaClass.getResourceAsStream(MODE.FONT)
         val LOGO = Image(javaClass.getResourceAsStream(MODE.LOGO))
         val TITLE = MODE.TITLE
 
@@ -23,7 +21,6 @@ class Main : Application() {
         primaryStage.scene = Scene(ROOT, 590.0, 240.0)
 
         // Scene parameters
-        Font.loadFont(FONT, 12.0)
         primaryStage.scene.stylesheets.add(STYLE)
         primaryStage.icons.add(LOGO)
         primaryStage.title = TITLE
@@ -47,7 +44,6 @@ class Main : Application() {
 
     enum class Mode(val ROOT: String = "/assets/Main.fxml",
                     val STYLE: String = "/assets/Main.css",
-                    val FONT: String = "/assets/Main.ttf",
                     val LOGO: String = "/assets/images/logo.png",
                     val TITLE: String = "Mod Pack Updater") {
         INSTALL(),
