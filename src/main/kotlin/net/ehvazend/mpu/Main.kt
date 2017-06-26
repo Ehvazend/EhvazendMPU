@@ -7,14 +7,17 @@ import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.scene.text.Font
 import javafx.stage.Stage
+import java.io.File
 
 class Main : Application() {
     override fun start(primaryStage: Stage) {
-        val ROOT = FXMLLoader.load<Parent>(javaClass.getResource("/assets/Main.fxml"))
-        val STYLE = javaClass.getResource("/assets/Main.css").toString()
-        val FONT = javaClass.getResourceAsStream("/assets/Main.ttf")
-        val LOGO = Image(javaClass.getResourceAsStream("/assets/images/logo.png"))
-        val TITLE = "Mod Pack Updater"
+        val MODE: Mode = mode()
+
+        val ROOT = FXMLLoader.load<Parent>(javaClass.getResource(MODE.ROOT))
+        val STYLE = javaClass.getResource(MODE.STYLE).toString()
+        val FONT = javaClass.getResourceAsStream(MODE.FONT)
+        val LOGO = Image(javaClass.getResourceAsStream(MODE.LOGO))
+        val TITLE = MODE.TITLE
 
         // Set scene
         primaryStage.scene = Scene(ROOT, 590.0, 240.0)
@@ -35,5 +38,19 @@ class Main : Application() {
         fun main(args: Array<String>) {
             launch(Main::class.java)
         }
+    }
+
+    fun mode() : Mode {
+        val currentPath: File = File("${System.getProperty("user.dir")}\\config.json")
+        return if(currentPath.isFile) Mode.UPDATE else Mode.INSTALL
+    }
+
+    enum class Mode(val ROOT: String = "/assets/Main.fxml",
+                    val STYLE: String = "/assets/Main.css",
+                    val FONT: String = "/assets/Main.ttf",
+                    val LOGO: String = "/assets/images/logo.png",
+                    val TITLE: String = "Mod Pack Updater") {
+        INSTALL(),
+        UPDATE()
     }
 }
