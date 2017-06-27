@@ -15,7 +15,7 @@ class Main : Application() {
         val ROOT = FXMLLoader.load<Parent>(javaClass.getResource(MODE.ROOT))
         val STYLE = javaClass.getResource(MODE.STYLE).toString()
         val LOGO = Image(javaClass.getResourceAsStream(MODE.LOGO))
-        val TITLE = MODE.TITLE
+        val TITLE = "MPU: ${MODE.TITLE}"
 
         // Set scene
         primaryStage.scene = Scene(ROOT, 590.0, 240.0)
@@ -37,16 +37,24 @@ class Main : Application() {
         }
     }
 
+    // Mode: Install or Update
     fun mode() : Mode {
         val currentPath: File = File("${System.getProperty("user.dir")}\\config.json")
         return if(currentPath.isFile) Mode.UPDATE else Mode.INSTALL
     }
 
-    enum class Mode(val ROOT: String = "/assets/Main.fxml",
+    // Debug version
+    fun mode(mode: Mode) : Mode {
+        return mode
+    }
+
+    enum class Mode(val ROOT: String,
                     val STYLE: String = "/assets/Main.css",
                     val LOGO: String = "/assets/images/logo.png",
-                    val TITLE: String = "Mod Pack Updater") {
-        INSTALL(),
-        UPDATE()
+                    val TITLE: String) {
+
+        INSTALL(ROOT = "/assets/Main_Install.fxml",TITLE = "Install"),
+        UPDATE(ROOT = "/assets/Main_Update.fxml",TITLE = "Update")
+
     }
 }
