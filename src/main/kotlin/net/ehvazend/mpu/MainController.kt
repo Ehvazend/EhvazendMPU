@@ -19,7 +19,7 @@ class MainController : FXMLAnnotation(), Initializable {
 
     // Создание переменных и констант
     // Creating variables and constants
-    private val NAME = "MinecraftMPU"
+    private val NAME = "EhvazendMPU"
 
     private var defaultPath: File = File("${System.getProperty("user.home")}\\AppData\\Roaming\\$NAME")
     private var currentPath: File? = defaultPath
