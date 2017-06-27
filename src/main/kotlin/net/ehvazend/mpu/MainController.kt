@@ -58,27 +58,20 @@ class MainController : FXMLAnnotation(), Initializable {
     fun changeCheckBoxDefaultPath() {
         when (checkBoxDefaultPath.isSelected) {
             true -> {
+                pastPath = currentPath!!
                 currentPath = defaultPath
-                updateTextFileInput(defaultPath.path)
+                updateTextFileInput(currentPath?.path)
                 buttonChooseDirectory.isDisable = true
             }
             false -> {
                 currentPath = pastPath
-                textFileInput.text = currentPath?.path
+                updateTextFileInput(currentPath?.path)
                 buttonChooseDirectory.isDisable = false
             }
         }
     }
 
     fun nextStep() {
-        /*println("Debugging Info:\n" +
-                "CheckBox Core - ${checkBoxCore.isSelected}\n" +
-                "CheckBox ImprovedGraphics - ${checkBoxImprovedGraphics.isSelected}\n" +
-                "CheckBox ImprovedGraphicsPlus - ${checkBoxImprovedGraphicsPlus.isSelected}\n" +
-                "CheckBox DefaultPath - ${checkBoxDefaultPath.isSelected}\n" +
-                "Default Path - $defaultPath\n" +
-                "Current Path - $currentPath\n")*/
-
         animationNode(Direction.right)
     }
 

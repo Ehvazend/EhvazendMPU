@@ -53,8 +53,8 @@ class Main : Application() {
                     val LOGO: String = "/assets/images/logo.png",
                     val TITLE: String) {
 
-        INSTALL(ROOT = "/assets/Main_Install.fxml",TITLE = "Install"),
-        UPDATE(ROOT = "/assets/Main_Update.fxml",TITLE = "Update")
+        INSTALL(ROOT = "/assets/Main_Install.fxml", TITLE = "Install"),
+        UPDATE(ROOT = "/assets/Main_Update.fxml", TITLE = "Update")
 
     }
 }
