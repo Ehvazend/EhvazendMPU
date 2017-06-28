@@ -2,9 +2,13 @@
     src: url(Main.ttf);
 }
 
-.input-file-text {
+.text-field, .text-area {
     -fx-background-radius: 0;
     -fx-background-insets: 0;
+}
+
+.content {
+    -fx-background-color: transparent;
 }
 
 .button {
@@ -18,6 +22,19 @@
     -fx-background-insets: 0;
     -fx-background-radius: 0;
     -fx-padding: 2px;
+}
+
+.progress-bar > .bar {
+    -fx-background-color: #316650;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.progress-bar > .track {
+    -fx-background-color: linear-gradient(to top, #efefef, #d9d9d9);
+    -fx-background-radius: 0;
+    -fx-background-insets:  0;
 }
 
 .text {

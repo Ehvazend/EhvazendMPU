@@ -1,9 +1,7 @@
 package net.ehvazend.mpu
 
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.CheckBox
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.layout.Pane
 
 open class FXMLAnnotation {
@@ -37,5 +35,14 @@ open class FXMLAnnotation {
 
     @FXML
     var buttonChooseDirectory: Button = Button()
+
+    @FXML
+    var install: Button = Button()
+
+    @FXML
+    var textInstall: TextArea = TextArea()
+
+    @FXML
+    var installProgressBar: ProgressBar = ProgressBar()
 
 }

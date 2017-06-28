@@ -1,6 +1,7 @@
 package net.ehvazend.mpu
 
 import net.ehvazend.mpu.FXMLAnimation.animationNode
+
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
@@ -77,5 +78,14 @@ class MainController : FXMLAnnotation(), Initializable {
 
     fun pastStep() {
         animationNode(Direction.left)
+    }
+
+    fun install() {
+        install.isDisable = true
+        val updater = Updater()
+        updater.start()
+        textInstall.text = "Install...\n(no)"
+        installProgressBar.progress = 1.0
+
     }
 }
