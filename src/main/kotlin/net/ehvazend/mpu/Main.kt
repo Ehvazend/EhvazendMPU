@@ -55,6 +55,5 @@ class Main : Application() {
 
         INSTALL(ROOT = "/assets/Main_Install.fxml", TITLE = "Install"),
         UPDATE(ROOT = "/assets/Main_Update.fxml", TITLE = "Update")
-
     }
 }

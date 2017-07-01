@@ -8,6 +8,7 @@ import javafx.stage.Stage
 import java.io.File
 import java.net.URL
 import java.util.*
+import kotlin.concurrent.thread
 
 class MainController : FXMLAnnotation(), Initializable {
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
@@ -82,10 +83,17 @@ class MainController : FXMLAnnotation(), Initializable {
 
     fun install() {
         install.isDisable = true
-        val updater = Updater()
-        updater.start()
-        textInstall.text = "Install...\n(no)"
-        installProgressBar.progress = 1.0
+        textInstall.isDisable = false
+        installProgressBar.isDisable =false
+
+        thread {
+            val listMods = Updater.checkMod("https://minecraft.curseforge.com/projects/just-enough-items-jei/files")
+
+            for (value in listMods) {
+                textInstall.appendText("${value[0]} ${value[1]} ${value[2]}\n")
+                println("${value[0]} ${value[1]} ${value[2]}")
+            }
+        }
 
     }
 }
