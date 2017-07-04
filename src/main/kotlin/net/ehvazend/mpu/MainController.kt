@@ -1,10 +1,10 @@
 package net.ehvazend.mpu
 
-import net.ehvazend.mpu.FXMLAnimation.animationNode
-
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
+import net.ehvazend.mpu.FXMLAnimation.animationNode
+import net.ehvazend.mpu.Install.installMPU
 import java.io.File
 import java.net.URL
 import java.util.*
@@ -84,16 +84,10 @@ class MainController : FXMLAnnotation(), Initializable {
     fun install() {
         install.isDisable = true
         textInstall.isDisable = false
-        installProgressBar.isDisable =false
+        installProgressBar.isDisable = false
 
-        thread {
-            val listMods = Updater.checkMod("https://minecraft.curseforge.com/projects/just-enough-items-jei/files")
-
-            for (value in listMods) {
-                textInstall.appendText("${value[0]} ${value[1]} ${value[2]}\n")
-                println("${value[0]} ${value[1]} ${value[2]}")
-            }
+        thread(name = "install") {
+            installMPU(currentPath!!, true, textInstall)
         }
-
     }
 }

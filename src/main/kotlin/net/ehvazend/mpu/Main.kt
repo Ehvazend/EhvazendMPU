@@ -38,13 +38,13 @@ class Main : Application() {
     }
 
     // Mode: Install or Update
-    fun mode() : Mode {
+    fun mode(): Mode {
         val currentPath: File = File("${System.getProperty("user.dir")}\\config.json")
-        return if(currentPath.isFile) Mode.UPDATE else Mode.INSTALL
+        return if (currentPath.isFile) Mode.UPDATE else Mode.INSTALL
     }
 
     // Debug version
-    fun mode(mode: Mode) : Mode {
+    fun mode(mode: Mode): Mode {
         return mode
     }
 
