@@ -1,5 +1,9 @@
 package net.ehvazend.mpu
 
+import com.beust.klaxon.JsonObject
+import com.beust.klaxon.string
+import net.ehvazend.mpu.HandlerJSON.parse
+import net.ehvazend.mpu.HandlerJSON.parseURLAddress
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -25,6 +29,13 @@ class Main : Application() {
         primaryStage.icons.add(LOGO)
         primaryStage.title = TITLE
         primaryStage.isResizable = false
+
+        // JSON include
+        val dataJSON: JsonObject = parse("/assets/Data.json") as JsonObject
+        val address = dataJSON.string("host") + dataJSON.string("hashProject") + dataJSON.string("mode") + dataJSON.string("nameCoreFile")
+
+        val coreJSON: JsonObject = parseURLAddress(address) as JsonObject
+        println("Name : ${coreJSON.string("name")}" + "\n" + "Version: ${coreJSON.string("version")}")
 
         // Run
         primaryStage.show()

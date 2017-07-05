@@ -10,13 +10,18 @@ object Install {
             return File("$directory\\" + nameFile)
         }
 
-        fun catchingValue(value: String) {
-            if (catchingMode && node != null) node.appendText(value + "\n")
+        fun separationPath(path: String): String{
+            return path.replace(directory.toString(), "")
+        }
+
+        fun catchingValue(value: String, modeShort: Boolean = false) {
+            if (catchingMode && node != null && !modeShort) node.appendText(value + "\n")
+            if (catchingMode && node != null && modeShort) node.appendText(separationPath(value) + "\n")
         }
 
         catchingValue(installDirectory(directory))
-        catchingValue(installFile(concatenationPath("config.json")))
-        catchingValue(copyCore(directory))
+        catchingValue(installFile(concatenationPath("config.json")), true)
+        catchingValue(copyCore(directory), true)
 
         return true
     }
