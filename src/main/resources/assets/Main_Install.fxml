@@ -47,7 +47,7 @@
          <children>
             <AnchorPane prefHeight="25.0" prefWidth="572.0">
                <children>
-                  <ComboBox fx:id="comboBox_Root" disable="true" minWidth="180.0" onAction="#comboBox_ChangePack" prefWidth="150.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ComboBox fx:id="comboBox_Root" disable="true" minWidth="180.0" onAction="#comboBox_ChangePack" prefWidth="150.0" visible="false" visibleRowCount="5" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

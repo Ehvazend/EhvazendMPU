@@ -25,6 +25,7 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
         }
     }
 
+    // Post initialization
     protected fun loadEnded(dataPack: ArrayList<JSON_DataPack>) {
         // Update value
         fun packingDataModule() {
@@ -36,7 +37,7 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
 
             for ((name) in dataPack) comboBox_Root.items.add(name)
 
-            // Also call event comboBox_ChangePack -> changeState
+            // Also call event comboBox_ChangePack -> setStatePack
             comboBox_Root.value = dataPack[0].name
 
             comboBox_Root.isVisible = true
@@ -50,18 +51,18 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
         }
     }
 
-    protected fun changeState(name: String) {
-        // Priority - 0
+    // State ---------------------------
+    protected fun setStatePack(name: String) {
         fun update(dataModule: JSON_DataModule) {
             when (dataModule.name) {
                 "core" -> {
-                    updateState(checkBox_Core, !dataModule.state)
+                    setState(checkBox_Core, !dataModule.state)
                 }
                 "improvedGraphics" -> {
-                    updateState(checkBox_ImprovedGraphics, !dataModule.state)
+                    setState(checkBox_ImprovedGraphics, !dataModule.state)
                 }
                 "improvedGraphicsPlus" -> {
-                    updateState(checkBox_ImprovedGraphicsPlus, !dataModule.state)
+                    setState(checkBox_ImprovedGraphicsPlus, !dataModule.state)
                 }
             }
         }
@@ -72,14 +73,14 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
                 .forEach { update(it) }
     }
 
-    protected fun updateState(node: CheckBox, disable: Boolean = node.isDisable, selected: Boolean = node.isSelected) {
+    protected fun setState(node: CheckBox, disable: Boolean = node.isDisable, selected: Boolean = node.isSelected) {
         node.isDisable = disable
         node.isSelected = selected
 
-        refresh(node)
+        refreshState(node)
     }
 
-    protected fun refresh(node: CheckBox) {
+    protected fun refreshState(node: CheckBox) {
         fun check(state: StateAssociation) {
             when {
                 state.checkBox.isDisable -> {
@@ -99,6 +100,7 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
             bindingImprovedGraphicsPlus.checkBox -> check(bindingImprovedGraphicsPlus)
         }
     }
+    // ---------------------------
 
     protected fun removeObject(node: Node) {
         Group().children.add(node)

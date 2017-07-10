@@ -45,18 +45,18 @@ class FXML_MainController : FXML_MainLogic(), Initializable {
     }
 
     fun checkBox_Core() {
-        refresh(checkBox_Core)
+        refreshState(checkBox_Core)
     }
 
     fun checkBox_ImprovedGraphics() {
-        refresh(checkBox_ImprovedGraphics)
+        refreshState(checkBox_ImprovedGraphics)
     }
 
     fun checkBox_ImprovedGraphicsPlus() {
-        refresh(checkBox_ImprovedGraphicsPlus)
+        refreshState(checkBox_ImprovedGraphicsPlus)
     }
 
     fun comboBox_ChangePack() {
-        changeState(comboBox_Root.value)
+        setStatePack(comboBox_Root.value)
     }
 }

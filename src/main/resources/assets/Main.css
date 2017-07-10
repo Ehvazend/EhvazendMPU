@@ -60,3 +60,21 @@
 .text-area > .scroll-pane:fitToWidth:fitToHeight > .viewport > .content {
     -fx-padding: 0px;
 }
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-padding: 4px 0px 4px 8px;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: #323232;
+}
+
+.combo-box-popup  > .list-view {
+    -fx-padding: 0;
+}
+
+.titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-effect: null;
+}
