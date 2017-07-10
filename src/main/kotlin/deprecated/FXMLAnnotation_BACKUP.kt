@@ -1,10 +1,10 @@
-package net.ehvazend.mpu
+package deprecated
 
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.layout.Pane
 
-open class FXMLAnnotation {
+open class FXMLAnnotation_BACKUP {
 
     @FXML
     var paneSlide: Pane = Pane()

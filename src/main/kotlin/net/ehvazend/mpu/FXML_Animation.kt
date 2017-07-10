@@ -2,10 +2,8 @@ package net.ehvazend.mpu
 
 import javafx.animation.*
 import javafx.scene.Node
-import javafx.util.Duration
-import javafx.animation.KeyFrame
-import javafx.animation.Timeline
 import javafx.scene.effect.ColorAdjust
+import javafx.util.Duration
 
 object FXML_Animation {
     var listSlides = ArrayList<Node>()

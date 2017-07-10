@@ -10,7 +10,7 @@ object Install {
             return File("$directory\\" + nameFile)
         }
 
-        fun separationPath(path: String): String{
+        fun separationPath(path: String): String {
             return path.replace(directory.toString(), "")
         }
 

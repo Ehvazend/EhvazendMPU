@@ -22,8 +22,7 @@ object ResourceBundle : java.util.ResourceBundle.Control() {
                     stream = connection.getInputStream()
                 }
             }
-        }
-        else stream = loader.getResourceAsStream(resourceName)
+        } else stream = loader.getResourceAsStream(resourceName)
 
         if (stream != null) try {
             // Only this line is changed to make it to read properties files as UTF-8.
@@ -35,6 +34,6 @@ object ResourceBundle : java.util.ResourceBundle.Control() {
     }
 
     fun getBundle(baseName: String, locale: Locale): java.util.ResourceBundle {
-        return ResourceBundle.newBundle(baseName, locale,"java.properties",javaClass.classLoader,false)
+        return ResourceBundle.newBundle(baseName, locale, "java.properties", javaClass.classLoader, false)
     }
 }

@@ -6,7 +6,7 @@ import javafx.scene.Node
 
 open class FXML_MainLogic : FXML_MainAnnotation() {
 
-    protected object Initialization: FXML_MainLogic() {
+    protected object Initialization : FXML_MainLogic() {
         // Animations
         fun slide(vararg nameNode: Node) {
             for (value in nameNode) {
@@ -50,10 +50,16 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
 
     protected fun changeState(name: String) {
         fun update(dataModule: JSON_DataModule) {
-            when(dataModule.name) {
-                "core" -> { checkBox_Core.isDisable = !dataModule.state; titledPane_Core.isDisable = !dataModule.state }
-                "improvedGraphics" -> { checkBox_ImprovedGraphics.isDisable = !dataModule.state; titledPane_ImprovedGraphics.isDisable = !dataModule.state }
-                "improvedGraphicsPlus" -> { checkBox_ImprovedGraphicsPlus.isDisable = !dataModule.state; titledPane_ImprovedGraphicsPlus.isDisable = !dataModule.state }
+            when (dataModule.name) {
+                "core" -> {
+                    checkBox_Core.isDisable = !dataModule.state; titledPane_Core.isDisable = !dataModule.state
+                }
+                "improvedGraphics" -> {
+                    checkBox_ImprovedGraphics.isDisable = !dataModule.state; titledPane_ImprovedGraphics.isDisable = !dataModule.state
+                }
+                "improvedGraphicsPlus" -> {
+                    checkBox_ImprovedGraphicsPlus.isDisable = !dataModule.state; titledPane_ImprovedGraphicsPlus.isDisable = !dataModule.state
+                }
             }
         }
 

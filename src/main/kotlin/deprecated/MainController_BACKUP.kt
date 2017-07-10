@@ -1,22 +1,32 @@
-package net.ehvazend.mpu
+package deprecated
 
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
-import net.ehvazend.mpu.FXMLAnimation.animationNode
+import net.ehvazend.mpu.*
+import net.ehvazend.mpu.FXML_Animation.slider
 import net.ehvazend.mpu.Install.installMPU
 import java.io.File
 import java.net.URL
-import java.util.*
+import java.util.ResourceBundle
 import kotlin.concurrent.thread
 
-class MainController : FXMLAnnotation(), Initializable {
-    override fun initialize(p0: URL?, p1: ResourceBundle?) {
+class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
+    override fun initialize(location: URL, resources: ResourceBundle) {
         updateTextFileInput(defaultPath.path)
 
-        FXMLAnimation.nodeList.add(paneSlideOne)
-        FXMLAnimation.nodeList.add(paneSlideTwo)
-        FXMLAnimation.nodeList.add(paneSlideThree)
+        FXML_Animation.listSlides.add(paneSlideOne)
+        FXML_Animation.listSlides.add(paneSlideTwo)
+        FXML_Animation.listSlides.add(paneSlideThree)
+
+        val coreJSON: ArrayList<JSON_DataPack> = JSON_Handler.packParser()
+        val dataJSON: JSON_DataMPU = JSON_Handler.dataMPU()
+
+        for (value in coreJSON) {
+            println(value)
+        }
+
+        println(dataJSON)
     }
 
     // Создание переменных и констант
@@ -74,11 +84,11 @@ class MainController : FXMLAnnotation(), Initializable {
     }
 
     fun nextStep() {
-        animationNode(Direction.right)
+        slider(Direction.right)
     }
 
     fun pastStep() {
-        animationNode(Direction.left)
+        slider(Direction.left)
     }
 
     fun install() {

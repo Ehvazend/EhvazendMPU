@@ -3,7 +3,6 @@ package net.ehvazend.mpu
 import com.beust.klaxon.*
 import java.net.HttpURLConnection
 import java.net.URL
-import kotlin.collections.ArrayList
 
 object JSON_Handler {
 
