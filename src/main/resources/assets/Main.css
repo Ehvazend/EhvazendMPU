@@ -1,14 +1,12 @@
 @font-face {
-    src: url(Main.ttf);
+    src: url(Main.otf);
 }
 
-.text-field, .text-area {
+* {
     -fx-background-radius: 0;
     -fx-background-insets: 0;
-}
-
-.text-area {
-    -fx-font-size: 12;
+    -fx-font-family: 'Minecraft';
+    -fx-font-smoothing-type: lcd;
 }
 
 .content {
@@ -17,30 +15,48 @@
 
 .button {
     -fx-background-color: linear-gradient(to bottom, #efefef, #d9d9d9);
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 5px;
+    -fx-padding: 5px 10px;
+}
+
+.combo-box {
+    -fx-background-color: linear-gradient(to bottom, #efefef, #d9d9d9);
 }
 
 .check-box > .box {
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
+    -fx-background-color: linear-gradient(to top, #efefef, #d9d9d9);
     -fx-padding: 2px;
 }
 
+.check-box > .box > .mark {
+    -fx-shape: "m259 258 46 0 0-46 47 0 0 46 46 0 0 47-46 0 0 46-47 0 0-46-46 0 0-47z";
+    -fx-padding: 6px;
+}
+
 .progress-bar > .bar {
-    -fx-background-color: #316650;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
+    -fx-background-color: #323232;
 }
 
 .progress-bar > .track {
     -fx-background-color: linear-gradient(to top, #efefef, #d9d9d9);
-    -fx-background-radius: 0;
-    -fx-background-insets:  0;
 }
 
-.text {
-    -fx-font-family: 'Minecraft Rus';
+.thumb {
+    -fx-background-color: #323232;
+}
+
+.scroll-pane {
+    -fx-padding: 0px;
+}
+
+.scroll-pane, .scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.titled-pane > .title, .titled-pane > .title:hover{
+    -fx-background-color: #efefef;
+    -fx-cursor: HAND;
+}
+
+.text-area > .scroll-pane:fitToWidth:fitToHeight > .viewport > .content {
+    -fx-padding: 0px;
 }

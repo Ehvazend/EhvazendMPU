@@ -1,41 +1,36 @@
 package net.ehvazend.mpu
 
-import com.beust.klaxon.JsonObject
-import com.beust.klaxon.string
-import net.ehvazend.mpu.HandlerJSON.parse
-import net.ehvazend.mpu.HandlerJSON.parseURLAddress
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.stage.Stage
 import java.io.File
+import java.util.*
 
 class Main : Application() {
     override fun start(primaryStage: Stage) {
         val MODE: Mode = mode()
 
-        val ROOT = FXMLLoader.load<Parent>(javaClass.getResource(MODE.ROOT))
+        val ROOT = FXMLLoader()
         val STYLE = javaClass.getResource(MODE.STYLE).toString()
         val LOGO = Image(javaClass.getResourceAsStream(MODE.LOGO))
         val TITLE = "MPU: ${MODE.TITLE}"
 
+        // Load resources
+        ROOT.location = javaClass.getResource(MODE.FXML)
+        ROOT.resources = ResourceBundle.getBundle("assets.lang.lang", Locale("en"))
+        ROOT.resources = ResourceBundle.getBundle("assets.lang.lang", Locale("ru"))
+
         // Set scene
-        primaryStage.scene = Scene(ROOT, 590.0, 240.0)
+        primaryStage.scene = Scene(ROOT.load(), 590.0, 240.0)
+        primaryStage.style
 
         // Scene parameters
         primaryStage.scene.stylesheets.add(STYLE)
         primaryStage.icons.add(LOGO)
         primaryStage.title = TITLE
         primaryStage.isResizable = false
-
-        // JSON include
-        val dataJSON: JsonObject = parse("/assets/Data.json") as JsonObject
-        val address = dataJSON.string("host") + dataJSON.string("hashProject") + dataJSON.string("mode") + dataJSON.string("nameCoreFile")
-
-        val coreJSON: JsonObject = parseURLAddress(address) as JsonObject
-        println("Name : ${coreJSON.string("name")}" + "\n" + "Version: ${coreJSON.string("version")}")
 
         // Run
         primaryStage.show()
@@ -59,12 +54,12 @@ class Main : Application() {
         return mode
     }
 
-    enum class Mode(val ROOT: String,
+    enum class Mode(val FXML: String,
                     val STYLE: String = "/assets/Main.css",
                     val LOGO: String = "/assets/images/logo.png",
                     val TITLE: String) {
 
-        INSTALL(ROOT = "/assets/Main_Install.fxml", TITLE = "Install"),
-        UPDATE(ROOT = "/assets/Main_Update.fxml", TITLE = "Update")
+        INSTALL(FXML = "/assets/Main_Install.fxml", TITLE = "Install"),
+        UPDATE(FXML = "/assets/Main_Update.fxml", TITLE = "Update")
     }
 }
