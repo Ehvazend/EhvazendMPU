@@ -23,7 +23,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" styleClass="panelRoot" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ehvazend.mpu.FXML_MainController">
+<Pane fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ehvazend.mpu.FXML_MainController">
    <children>
       <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -193,5 +193,6 @@
             </AnchorPane>
          </children>
       </VBox>
+      <Button cancelButton="true" defaultButton="true" layoutY="-25.0" mnemonicParsing="false" onAction="#button_Test" text="Button" />
    </children>
 </Pane>

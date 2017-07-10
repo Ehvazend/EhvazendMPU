@@ -3,9 +3,9 @@ package net.ehvazend.mpu
 import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Node
+import javafx.scene.control.CheckBox
 
 open class FXML_MainLogic : FXML_MainAnnotation() {
-
     protected object Initialization : FXML_MainLogic() {
         // Animations
         fun slide(vararg nameNode: Node) {
@@ -28,13 +28,15 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
     protected fun loadEnded(dataPack: ArrayList<JSON_DataPack>) {
         // Update value
         fun packingDataModule() {
-            dataPack.mapTo(dataModule) { wrapperDataModule(it.name, it.stateModules) }
+            dataPack.mapTo(dataModule) { ModuleAssociation(it.name, it.stateModules) }
         }
 
         Platform.runLater {
             packingDataModule()
 
             for ((name) in dataPack) comboBox_Root.items.add(name)
+
+            // Also call event comboBox_ChangePack -> changeState
             comboBox_Root.value = dataPack[0].name
 
             comboBox_Root.isVisible = true
@@ -49,16 +51,17 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
     }
 
     protected fun changeState(name: String) {
+        // Priority - 0
         fun update(dataModule: JSON_DataModule) {
             when (dataModule.name) {
                 "core" -> {
-                    checkBox_Core.isDisable = !dataModule.state; titledPane_Core.isDisable = !dataModule.state
+                    updateState(checkBox_Core, !dataModule.state)
                 }
                 "improvedGraphics" -> {
-                    checkBox_ImprovedGraphics.isDisable = !dataModule.state; titledPane_ImprovedGraphics.isDisable = !dataModule.state
+                    updateState(checkBox_ImprovedGraphics, !dataModule.state)
                 }
                 "improvedGraphicsPlus" -> {
-                    checkBox_ImprovedGraphicsPlus.isDisable = !dataModule.state; titledPane_ImprovedGraphicsPlus.isDisable = !dataModule.state
+                    updateState(checkBox_ImprovedGraphicsPlus, !dataModule.state)
                 }
             }
         }
@@ -67,6 +70,34 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
                 .filter { it.name == name }
                 .flatMap { it.listDataModule }
                 .forEach { update(it) }
+    }
+
+    protected fun updateState(node: CheckBox, disable: Boolean = node.isDisable, selected: Boolean = node.isSelected) {
+        node.isDisable = disable
+        node.isSelected = selected
+
+        refresh(node)
+    }
+
+    protected fun refresh(node: CheckBox) {
+        fun check(state: StateAssociation) {
+            when {
+                state.checkBox.isDisable -> {
+                    state.titledPane.isDisable = state.checkBox.isDisable
+                    if (state.checkBox.isDisable) titledPane_Core.isExpanded = false
+                }
+                else -> {
+                    state.titledPane.isDisable = !state.checkBox.isSelected
+                    if (!state.checkBox.isSelected) titledPane_Core.isExpanded = false
+                }
+            }
+        }
+
+        when (node) {
+            bindingCore.checkBox -> check(bindingCore)
+            bindingImprovedGraphics.checkBox -> check(bindingImprovedGraphics)
+            bindingImprovedGraphicsPlus.checkBox -> check(bindingImprovedGraphicsPlus)
+        }
     }
 
     protected fun removeObject(node: Node) {
