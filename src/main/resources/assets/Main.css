@@ -65,9 +65,13 @@
     -fx-padding: 4px 0px 4px 8px;
 }
 
-.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
 .combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
     -fx-background-color: transparent;
+    -fx-text-fill: #323232;
+}
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected:hover {
+    -fx-background-color: #efefef;
     -fx-text-fill: #323232;
 }
 
