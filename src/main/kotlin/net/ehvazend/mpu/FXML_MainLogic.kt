@@ -4,6 +4,11 @@ import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Node
 import javafx.scene.control.CheckBox
+import javafx.stage.DirectoryChooser
+import javafx.stage.Modality
+import javafx.stage.Stage
+import javafx.stage.Window
+import java.io.File
 
 open class FXML_MainLogic : FXML_MainAnnotation() {
     protected object Initialization : FXML_MainLogic() {
@@ -100,7 +105,46 @@ open class FXML_MainLogic : FXML_MainAnnotation() {
             bindingImprovedGraphicsPlus.checkBox -> check(bindingImprovedGraphicsPlus)
         }
     }
-    // ---------------------------
+    // ---------------------------------
+
+    // Directory path for install-------
+    protected fun callChooseDirectory(initialDirectory: File, modalityWindow: Window): File? {
+
+        val directoryChooser = DirectoryChooser()
+
+        val stage = Stage().also {
+            it.initOwner(modalityWindow)
+            it.initModality(Modality.WINDOW_MODAL)
+        }
+
+        directoryChooser.initialDirectory = initialDirectory
+        return directoryChooser.showDialog(stage.owner)
+
+    }
+
+    protected fun setInstallPath(path: File) {
+        currentPath = path.let { if (it.toString().indexOf(NAME) != -1) it else File("$path\\$NAME") }
+        refreshInstallPath()
+    }
+
+    protected fun setDefaultInstallPath(value: Boolean) {
+        when (value) {
+            true -> {
+                bufferPath = currentPath
+                setInstallPath(defaultPath)
+            }
+            false -> {
+                setInstallPath(bufferPath)
+            }
+        }
+
+        button_ChooseDirectory.isDisable = value
+    }
+
+    protected fun refreshInstallPath() {
+        textField_InstallDirectory.text = currentPath.toString()
+    }
+    // ---------------------------------
 
     protected fun removeObject(node: Node) {
         Group().children.add(node)

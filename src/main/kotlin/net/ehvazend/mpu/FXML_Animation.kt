@@ -46,9 +46,7 @@ object FXML_Animation {
     }
 
     fun effectChange(node: Node) {
-        val effect = ColorAdjust(-1.0, 0.0, 0.0, 0.0)
-        node.effect = effect
-        val keyValue = KeyValue(effect.hueProperty(), 1.0)
+        val keyValue = KeyValue((node.effect as ColorAdjust).hueProperty(), 1.0)
         val keyFrame = KeyFrame(Duration.seconds(20.0), keyValue)
         val timeline = Timeline(keyFrame)
         timeline.cycleCount = Timeline.INDEFINITE

@@ -14,6 +14,9 @@ open class FXML_MainAnnotation {
 
     protected val NAME = "EhvazendMPU"
     protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming\\$NAME")
+    protected var currentPath = defaultPath
+    protected var bufferPath = currentPath
+
     protected val dataModule = ArrayList<ModuleAssociation>()
 
     protected lateinit var bindingCore: StateAssociation
@@ -39,7 +42,7 @@ open class FXML_MainAnnotation {
     protected var rectangle_Root = Rectangle()
 
     @FXML
-    protected var textField_OutputDirectory = TextField()
+    protected var textField_InstallDirectory = TextField()
 
     @FXML
     protected var button_ChooseDirectory = Button()
@@ -69,4 +72,7 @@ open class FXML_MainAnnotation {
     @FXML
     protected var titledPane_ImprovedGraphicsPlus = TitledPane()
     //
+
+    @FXML
+    protected var checkBox_DefaultPath = CheckBox()
 }

@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
-
-<Pane fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ehvazend.mpu.FXML_MainController">
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/8.0.111" fx:controller="net.ehvazend.mpu.FXML_MainController">
    <children>
       <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -42,6 +32,9 @@
                </stops>
             </LinearGradient>
          </fill>
+          <effect>
+              <ColorAdjust brightness="0.25" hue="-1.0" saturation="0.25"/>
+          </effect>
       </Rectangle>
       <VBox fx:id="VBox_Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0">
          <children>
@@ -95,7 +88,9 @@
                         </AnchorPane>
                         <HBox>
                            <children>
-                              <TextField fx:id="textField_OutputDirectory" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="544.0" />
+                               <TextField fx:id="textField_InstallDirectory" editable="false"
+                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                          prefHeight="25.0" prefWidth="544.0"/>
                               <Button fx:id="button_ChooseDirectory" mnemonicParsing="false" onAction="#button_ChooseDirectory" text="...">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
