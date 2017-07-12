@@ -1,13 +1,15 @@
-package net.ehvazend.mpu
+package net.ehvazend.mpu.install
 
 import javafx.event.ActionEvent
 import javafx.fxml.Initializable
 import javafx.scene.Node
+import net.ehvazend.mpu.Direction
+import net.ehvazend.mpu.FXML_Animation
 import java.net.URL
-import java.util.ResourceBundle
+import java.util.*
 import kotlin.concurrent.thread
 
-class FXML_MainController : FXML_MainLogic(), Initializable {
+class FXML_Controller : FXML_Logic(), Initializable {
     // Initialization in JavaFX Threat
     override fun initialize(location: URL, resources: ResourceBundle) {
         //Variable late initialization
@@ -24,14 +26,15 @@ class FXML_MainController : FXML_MainLogic(), Initializable {
     }
 
     fun button_Test() {
+
     }
 
     fun button_Next() {
-        FXML_Animation.slider(Direction.right)
+        FXML_Animation.slider(Direction.RIGHT)
     }
 
     fun button_Past() {
-        FXML_Animation.slider(Direction.left)
+        FXML_Animation.slider(Direction.LEFT)
     }
 
     fun button_ChooseDirectory(actionEvent: ActionEvent) {
@@ -40,12 +43,12 @@ class FXML_MainController : FXML_MainLogic(), Initializable {
         }
     }
 
-    fun button_Install() {
-
-    }
-
     fun checkBox_DefaultPath() {
         setDefaultInstallPath(checkBox_DefaultPath.isSelected)
+    }
+
+    fun button_Install() {
+
     }
 
     fun checkBox_Core() {

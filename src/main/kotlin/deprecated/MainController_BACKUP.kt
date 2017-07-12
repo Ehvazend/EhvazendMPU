@@ -84,11 +84,11 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
     }
 
     fun nextStep() {
-        slider(Direction.right)
+        slider(Direction.RIGHT)
     }
 
     fun pastStep() {
-        slider(Direction.left)
+        slider(Direction.LEFT)
     }
 
     fun install() {

@@ -1,4 +1,4 @@
-package net.ehvazend.mpu
+package net.ehvazend.mpu.install
 
 import javafx.application.Platform
 import javafx.scene.Group
@@ -8,10 +8,14 @@ import javafx.stage.DirectoryChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
+import net.ehvazend.mpu.FXML_Animation
+import net.ehvazend.mpu.JSON_DataModule
+import net.ehvazend.mpu.JSON_DataPack
+import net.ehvazend.mpu.JSON_Handler
 import java.io.File
 
-open class FXML_MainLogic : FXML_MainAnnotation() {
-    protected object Initialization : FXML_MainLogic() {
+open class FXML_Logic : FXML_Annotation() {
+    protected object Initialization : FXML_Logic() {
         // Animations
         fun slide(vararg nameNode: Node) {
             for (value in nameNode) {

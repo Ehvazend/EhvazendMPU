@@ -1,4 +1,4 @@
-package net.ehvazend.mpu
+package net.ehvazend.mpu.install
 
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -6,9 +6,10 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import javafx.scene.shape.Rectangle
+import net.ehvazend.mpu.JSON_DataModule
 import java.io.File
 
-open class FXML_MainAnnotation {
+open class FXML_Annotation {
     protected data class ModuleAssociation(val name: String, val listDataModule: ArrayList<JSON_DataModule>)
     protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane)
 

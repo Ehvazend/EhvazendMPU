@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/8.0.111" fx:controller="net.ehvazend.mpu.FXML_MainController">
+      xmlns="http://javafx.com/javafx/8.0.111" fx:controller="net.ehvazend.mpu.install.FXML_Controller">
    <children>
       <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>

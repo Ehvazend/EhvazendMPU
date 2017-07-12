@@ -59,7 +59,7 @@ class Main : Application() {
                     val LOGO: String = "/assets/images/logo.png",
                     val TITLE: String) {
 
-        INSTALL(FXML = "/assets/Main_Install.fxml", TITLE = "Install"),
-        UPDATE(FXML = "/assets/Main_Update.fxml", TITLE = "Update")
+        INSTALL(FXML = "/assets/Main_INSTALL.fxml", TITLE = "Install"),
+        UPDATE(FXML = "/assets/Main_UPDATE.fxml", TITLE = "Update")
     }
 }
