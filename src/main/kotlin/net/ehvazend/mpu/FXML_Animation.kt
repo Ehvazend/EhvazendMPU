@@ -9,7 +9,7 @@ object FXML_Animation {
     var listSlides = ArrayList<Node>()
     var activeNodeNumber = 0
 
-    fun slider(direction: Direction) {
+    fun slider(direction: FXML_Animation.Direction) {
         val newActiveSlideNumber = direction.codeNumber
 
         // Exception block without crash
@@ -51,5 +51,9 @@ object FXML_Animation {
         val timeline = Timeline(keyFrame)
         timeline.cycleCount = Timeline.INDEFINITE
         timeline.play()
+    }
+
+    enum class Direction(val coordinate: Double, val codeNumber: Int) {
+        LEFT(600.0, -1), RIGHT(-600.0, 1)
     }
 }

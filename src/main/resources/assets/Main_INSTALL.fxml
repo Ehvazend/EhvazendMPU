@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Background.png" />
+            <Image url="@../deprecated/images/Background.png"/>
          </image>
          <effect>
             <ColorAdjust />

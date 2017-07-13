@@ -3,8 +3,8 @@ package net.ehvazend.mpu.install
 import javafx.event.ActionEvent
 import javafx.fxml.Initializable
 import javafx.scene.Node
-import net.ehvazend.mpu.Direction
 import net.ehvazend.mpu.FXML_Animation
+import net.ehvazend.mpu.FXML_Animation.Direction
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread

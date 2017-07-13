@@ -1,23 +1,26 @@
 package net.ehvazend.mpu
 
 import com.beust.klaxon.*
+import net.ehvazend.mpu.data.JSON_DataMPU
+import net.ehvazend.mpu.data.JSON_DataModule
+import net.ehvazend.mpu.data.JSON_DataPack
 import java.net.HttpURLConnection
 import java.net.URL
 
 object JSON_Handler {
 
-    fun parser(name: String): JsonObject {
-        return javaClass.getResourceAsStream(name).let { Parser().parse(it) } as JsonObject
+    fun loaderFile(name: String): Any {
+        return javaClass.getResourceAsStream(name).let { Parser().parse(it) } as Any
     }
 
-    fun parserURLAddress(name: String): Any? {
-        val uc = URL(name).openConnection() as HttpURLConnection
-        return uc.inputStream.let { Parser().parse(it) }
+    fun loaderURL(name: String): Any {
+        return (URL(name).openConnection() as HttpURLConnection).inputStream.let { Parser().parse(it) } as Any
     }
 
+    // TODO: Do better
     fun dataMPU(): JSON_DataMPU {
-        val value = parser("/assets/Data.json")
-        return JSON_DataMPU(host = value.string("host")!!, hashProject = value.string("hashProject")!!, mode = value.string("mode")!!, nameCoreFile = value.string("nameCoreFile")!!)
+        val value = loaderFile("/assets/DataCore.json") as JsonObject
+        return JSON_DataMPU(value.string("host")!!, value.string("hashProject")!!, value.string("mode")!!, value.string("nameCoreFile")!!)
     }
 
     fun address(): String {
@@ -27,14 +30,14 @@ object JSON_Handler {
 
     fun packParser(): ArrayList<JSON_DataPack> {
         val address = address()
-        val coreJSON = parserURLAddress(address) as JsonArray<*>
+        val coreJSON = loaderURL(address) as JsonArray<*>
 
         val list = ArrayList<JSON_DataPack>()
 
         for (value in coreJSON) {
             value as JsonObject
 
-            val pack = JSON_DataPack(name = value.string("name")!!, version = value.string("version")!!, hash = value.string("hash")!!, stateModules = ArrayList())
+            val pack = JSON_DataPack(value.string("name")!!, value.string("version")!!, value.string("hash")!!, stateModules = ArrayList())
 
             for ((key) in value.obj("modules")!!) {
                 pack.stateModules.add(JSON_DataModule(key, value.obj("modules")?.boolean(key)!!))

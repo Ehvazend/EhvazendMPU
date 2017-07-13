@@ -4,7 +4,8 @@ import javafx.scene.control.TextInputControl
 import java.io.File
 import java.nio.file.Files
 
-object Install {
+// File system operations handler
+object FSOH_Install {
     fun installMPU(directory: File, catchingMode: Boolean = false, node: TextInputControl? = null): Boolean {
         fun concatenationPath(nameFile: String): File {
             return File("$directory\\" + nameFile)

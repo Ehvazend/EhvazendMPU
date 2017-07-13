@@ -3,12 +3,14 @@ package deprecated
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
-import net.ehvazend.mpu.*
-import net.ehvazend.mpu.FXML_Animation.slider
-import net.ehvazend.mpu.Install.installMPU
+import net.ehvazend.mpu.FSOH_Install.installMPU
+import net.ehvazend.mpu.FXML_Animation
+import net.ehvazend.mpu.JSON_Handler
+import net.ehvazend.mpu.data.JSON_DataMPU
+import net.ehvazend.mpu.data.JSON_DataPack
 import java.io.File
 import java.net.URL
-import java.util.ResourceBundle
+import java.util.*
 import kotlin.concurrent.thread
 
 class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
@@ -84,11 +86,11 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
     }
 
     fun nextStep() {
-        slider(Direction.RIGHT)
+//        slider(Direction.RIGHT)
     }
 
     fun pastStep() {
-        slider(Direction.LEFT)
+//        slider(Direction.LEFT)
     }
 
     fun install() {

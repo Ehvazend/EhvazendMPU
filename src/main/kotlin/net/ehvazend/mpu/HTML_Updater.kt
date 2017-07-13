@@ -5,7 +5,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
-object Updater {
+object HTML_Updater {
     // TODO: 27.06.2017 HTML Parser with processing Curse mods
 
     private val rootAddress = "https://minecraft.curseforge.com"

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.stage.Stage
+import net.ehvazend.mpu.override.ResourceBundle
 import java.io.File
 import java.util.*
 
@@ -56,7 +57,7 @@ class Main : Application() {
 
     enum class Mode(val FXML: String,
                     val STYLE: String = "/assets/Main.css",
-                    val LOGO: String = "/assets/images/logo.png",
+                    val LOGO: String = "/deprecated/images/logo.png",
                     val TITLE: String) {
 
         INSTALL(FXML = "/assets/Main_INSTALL.fxml", TITLE = "Install"),
