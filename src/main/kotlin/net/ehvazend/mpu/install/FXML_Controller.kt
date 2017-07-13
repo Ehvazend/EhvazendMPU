@@ -18,7 +18,7 @@ class FXML_Controller : FXML_Logic(), Initializable {
         bindingImprovedGraphicsPlus = StateAssociation(checkBox_ImprovedGraphicsPlus, titledPane_ImprovedGraphicsPlus)
 
         thread {
-            refreshInstallPath()
+            setInstallPath(defaultPath)
             Initialization.slide(VBox_Home, VBox_ModSelection, VBox_Install)
             Initialization.effect(rectangle_Root)
             Initialization.JSON().also { loadEnded(it) }

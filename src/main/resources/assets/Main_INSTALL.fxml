@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
-<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="panel_Root" maxHeight="-Infinity" maxWidth="-Infinity"
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="pane_Root" maxHeight="-Infinity" maxWidth="-Infinity"
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0"
       xmlns="http://javafx.com/javafx/8.0.111" fx:controller="net.ehvazend.mpu.install.FXML_Controller">
    <children>

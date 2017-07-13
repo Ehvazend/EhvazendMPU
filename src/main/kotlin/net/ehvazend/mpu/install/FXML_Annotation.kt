@@ -14,7 +14,7 @@ open class FXML_Annotation {
     protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane)
 
     protected val NAME = "EhvazendMPU"
-    protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming\\$NAME")
+    protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming")
     protected var currentPath = defaultPath
     protected var bufferPath = currentPath
 
@@ -25,7 +25,7 @@ open class FXML_Annotation {
     protected lateinit var bindingImprovedGraphicsPlus: StateAssociation
 
     @FXML
-    protected var panel_Root = Pane()
+    protected var pane_Root = Pane()
 
     @FXML
     protected var VBox_Home = VBox()
