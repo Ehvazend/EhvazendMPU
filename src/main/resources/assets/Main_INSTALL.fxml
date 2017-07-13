@@ -17,7 +17,7 @@
    <children>
       <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../deprecated/images/Background.png"/>
+             <Image url="@../deprecated/images/Background.png"/>
          </image>
          <effect>
             <ColorAdjust />
@@ -124,17 +124,19 @@
                      <content>
                         <Accordion prefWidth="559.0">
                           <panes>
-                            <TitledPane fx:id="titledPane_Core" expanded="false" text="%checkBox.core">
+                              <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>
                             </TitledPane>
-                            <TitledPane fx:id="titledPane_ImprovedGraphics" expanded="false" text="%checkBox.improvedGraphics">
+                              <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false"
+                                          text="%checkBox.improvedGraphics">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>
                             </TitledPane>
-                            <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" expanded="false" text="%checkBox.improvedGraphicsPlus">
+                              <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false"
+                                          text="%checkBox.improvedGraphicsPlus">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>

@@ -3,8 +3,10 @@ package net.ehvazend.mpu.install
 import javafx.event.ActionEvent
 import javafx.fxml.Initializable
 import javafx.scene.Node
+import javafx.scene.effect.ColorAdjust
 import net.ehvazend.mpu.FXML_Animation
-import net.ehvazend.mpu.FXML_Animation.Direction
+import net.ehvazend.mpu.FXML_Animation.Slider.Direction
+import net.ehvazend.mpu.FXML_Animation.Slider.step
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
@@ -16,11 +18,12 @@ class FXML_Controller : FXML_Logic(), Initializable {
         bindingCore = StateAssociation(checkBox_Core, titledPane_Core)
         bindingImprovedGraphics = StateAssociation(checkBox_ImprovedGraphics, titledPane_ImprovedGraphics)
         bindingImprovedGraphicsPlus = StateAssociation(checkBox_ImprovedGraphicsPlus, titledPane_ImprovedGraphicsPlus)
+        RootEffect = FXML_Animation.Timeline((rectangle_Root.effect as ColorAdjust).hueProperty(), value = 1.0, duration = 20.0)
 
-        thread {
+        thread(name = "Initialize") {
+            RootEffect.play()
             setInstallPath(defaultPath)
             Initialization.slide(VBox_Home, VBox_ModSelection, VBox_Install)
-            Initialization.effect(rectangle_Root)
             Initialization.JSON().also { loadEnded(it) }
         }
     }
@@ -30,17 +33,19 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun button_Next() {
-        FXML_Animation.slider(Direction.RIGHT)
+        step(Direction.RIGHT)
     }
 
     fun button_Past() {
-        FXML_Animation.slider(Direction.LEFT)
+        step(Direction.LEFT)
     }
 
     fun button_ChooseDirectory(actionEvent: ActionEvent) {
+        RootEffect.pause()
         callChooseDirectory(defaultPath, modalityWindow = (actionEvent.source as Node).scene.window).also {
             if (it != null) setInstallPath(it)
         }
+        RootEffect.play()
     }
 
     fun checkBox_DefaultPath() {

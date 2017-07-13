@@ -1,5 +1,6 @@
 package net.ehvazend.mpu.install
 
+import javafx.animation.Timeline
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
@@ -13,12 +14,15 @@ open class FXML_Annotation {
     protected data class ModuleAssociation(val name: String, val listDataModule: ArrayList<JSON_DataModule>)
     protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane)
 
-    protected val NAME = "EhvazendMPU"
-    protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming")
-    protected var currentPath = defaultPath
-    protected var bufferPath = currentPath
-
     protected val dataModule = ArrayList<ModuleAssociation>()
+
+    protected val NAME = "EhvazendMPU"
+
+    protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming")
+    protected lateinit var currentPath: File
+    protected lateinit var bufferPath: File
+
+    protected lateinit var RootEffect: Timeline
 
     protected lateinit var bindingCore: StateAssociation
     protected lateinit var bindingImprovedGraphics: StateAssociation

@@ -4,11 +4,13 @@ import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Node
 import javafx.scene.control.CheckBox
+import javafx.scene.control.TextInputControl
 import javafx.stage.DirectoryChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
 import javafx.stage.Window
-import net.ehvazend.mpu.FXML_Animation
+import net.ehvazend.mpu.FS_Handler
+import net.ehvazend.mpu.FXML_Animation.Slider
 import net.ehvazend.mpu.JSON_Handler
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
@@ -19,19 +21,17 @@ open class FXML_Logic : FXML_Annotation() {
         // Animations
         fun slide(vararg nameNode: Node) {
             for (value in nameNode) {
-                FXML_Animation.listSlides.add(value)
-            }
-        }
-
-        fun effect(vararg nameNode: Node) {
-            for (value in nameNode) {
-                FXML_Animation.effectChange(value)
+                Slider.addSlide(value)
             }
         }
 
         fun JSON(): ArrayList<JSON_DataPack> {
             return JSON_Handler.loaderPack()
         }
+    }
+
+    protected fun removeObject(node: Node) {
+        Group().children.add(node)
     }
 
     // Post initialization
@@ -150,7 +150,24 @@ open class FXML_Logic : FXML_Annotation() {
     }
     // ---------------------------------
 
-    protected fun removeObject(node: Node) {
-        Group().children.add(node)
+    protected fun install(directory: File, catchingMode: Boolean = false, node: TextInputControl? = null): Boolean {
+        fun concatenationPath(nameFile: String): File {
+            return File("$directory\\" + nameFile)
+        }
+
+        fun separationPath(path: String): String {
+            return path.replace(directory.toString(), "")
+        }
+
+        fun catchingValue(value: String, modeShort: Boolean = false) {
+            if (catchingMode && node != null && !modeShort) node.appendText(value + "\n")
+            if (catchingMode && node != null && modeShort) node.appendText(separationPath(value) + "\n")
+        }
+
+        catchingValue(FS_Handler.createDirectory(directory))
+        catchingValue(FS_Handler.createFile(concatenationPath("config.json")), true)
+        catchingValue(FS_Handler.copyCore(directory), true)
+
+        return true
     }
 }

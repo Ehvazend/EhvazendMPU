@@ -1,10 +1,9 @@
 package deprecated
 
+//import net.ehvazend.mpu.FS_Handler.installMPU
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
-//import net.ehvazend.mpu.FS_Handler.installMPU
-import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.JSON_Handler
 import net.ehvazend.mpu.data.JSON_DataMPU
 import net.ehvazend.mpu.data.JSON_DataPack
@@ -17,9 +16,9 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
     override fun initialize(location: URL, resources: ResourceBundle) {
         updateTextFileInput(defaultPath.path)
 
-        FXML_Animation.listSlides.add(paneSlideOne)
-        FXML_Animation.listSlides.add(paneSlideTwo)
-        FXML_Animation.listSlides.add(paneSlideThree)
+//        FXML_Animation.listSlides.add(paneSlideOne)
+//        FXML_Animation.listSlides.add(paneSlideTwo)
+//        FXML_Animation.listSlides.add(paneSlideThree)
 
         val coreJSON: ArrayList<JSON_DataPack> = JSON_Handler.loaderPack()
         val dataJSON: JSON_DataMPU = JSON_Handler.loaderCore()
@@ -86,11 +85,11 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
     }
 
     fun nextStep() {
-//        slider(Direction.RIGHT)
+//        step(Direction.RIGHT)
     }
 
     fun pastStep() {
-//        slider(Direction.LEFT)
+//        step(Direction.LEFT)
     }
 
     fun install() {
