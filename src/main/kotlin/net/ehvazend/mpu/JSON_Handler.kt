@@ -17,35 +17,42 @@ object JSON_Handler {
         return (URL(name).openConnection() as HttpURLConnection).inputStream.let { Parser().parse(it) } as Any
     }
 
-    // TODO: Do better
-    fun dataMPU(): JSON_DataMPU {
-        val value = loaderFile("/assets/DataCore.json") as JsonObject
-        return JSON_DataMPU(value.string("host")!!, value.string("hashProject")!!, value.string("mode")!!, value.string("nameCoreFile")!!)
-    }
-
-    fun address(): String {
-        val dataMPU = dataMPU()
-        return dataMPU.host + dataMPU.hashProject + dataMPU.mode
-    }
-
-    fun packParser(): ArrayList<JSON_DataPack> {
-        val address = address()
-        val coreJSON = loaderURL(address) as JsonArray<*>
-
-        val list = ArrayList<JSON_DataPack>()
-
-        for (value in coreJSON) {
-            value as JsonObject
-
-            val pack = JSON_DataPack(value.string("name")!!, value.string("version")!!, value.string("hash")!!, stateModules = ArrayList())
-
-            for ((key) in value.obj("modules")!!) {
-                pack.stateModules.add(JSON_DataModule(key, value.obj("modules")?.boolean(key)!!))
-            }
-
-            list.add(pack)
+    fun loaderCore(): JSON_DataMPU {
+        return (loaderFile("/assets/DataCore.json") as JsonObject).let {
+            JSON_DataMPU(
+                    it.string("host")!!,
+                    it.string("hashProject")!!,
+                    it.string("mode")!!,
+                    it.string("nameCoreFile")!!
+            )
         }
+    }
 
-        return list
+    fun loaderPack(): ArrayList<JSON_DataPack> {
+        val packs = loaderURL(loaderCore().let {
+            it.host + it.hashProject + it.mode
+        })
+
+        return ArrayList<JSON_DataPack>().also {
+            for (value in packs as JsonArray<*>) {
+                (value as JsonObject)
+
+                val pack = JSON_DataPack(
+                        value.string("name")!!,
+                        value.string("version")!!,
+                        value.string("hash")!!,
+                        stateModules = ArrayList()
+                )
+
+                for ((key) in value.obj("modules") as JsonObject) {
+                    pack.stateModules.add(JSON_DataModule(
+                            name = key,
+                            state = (value.obj("modules") as JsonObject).boolean(key)!!
+                    ))
+                }
+
+                it.add(pack)
+            }
+        }
     }
 }

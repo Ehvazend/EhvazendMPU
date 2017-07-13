@@ -3,7 +3,7 @@ package deprecated
 import javafx.fxml.Initializable
 import javafx.stage.DirectoryChooser
 import javafx.stage.Stage
-import net.ehvazend.mpu.FSOH_Install.installMPU
+//import net.ehvazend.mpu.FS_Handler.installMPU
 import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.JSON_Handler
 import net.ehvazend.mpu.data.JSON_DataMPU
@@ -21,8 +21,8 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
         FXML_Animation.listSlides.add(paneSlideTwo)
         FXML_Animation.listSlides.add(paneSlideThree)
 
-        val coreJSON: ArrayList<JSON_DataPack> = JSON_Handler.packParser()
-        val dataJSON: JSON_DataMPU = JSON_Handler.dataMPU()
+        val coreJSON: ArrayList<JSON_DataPack> = JSON_Handler.loaderPack()
+        val dataJSON: JSON_DataMPU = JSON_Handler.loaderCore()
 
         for (value in coreJSON) {
             println(value)
@@ -99,7 +99,7 @@ class MainController_BACKUP : FXMLAnnotation_BACKUP(), Initializable {
         installProgressBar.isDisable = false
 
         thread(name = "install") {
-            installMPU(currentPath!!, true, textInstall)
+            //            installMPU(currentPath!!, true, textInstall)
         }
     }
 }

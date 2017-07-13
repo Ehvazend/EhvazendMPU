@@ -30,7 +30,7 @@ open class FXML_Logic : FXML_Annotation() {
         }
 
         fun JSON(): ArrayList<JSON_DataPack> {
-            return JSON_Handler.packParser()
+            return JSON_Handler.loaderPack()
         }
     }
 
