@@ -12,6 +12,7 @@ import javafx.stage.Window
 import net.ehvazend.mpu.FS_Handler
 import net.ehvazend.mpu.FXML_Animation.Slider
 import net.ehvazend.mpu.JSON_Handler
+import net.ehvazend.mpu.Repository
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
 import java.io.File
@@ -26,7 +27,7 @@ open class FXML_Logic : FXML_Annotation() {
         }
 
         fun JSON(): ArrayList<JSON_DataPack> {
-            return JSON_Handler.loaderPack()
+            return JSON_Handler.loaderPack(Repository.repositories()[0])
         }
     }
 
@@ -51,6 +52,9 @@ open class FXML_Logic : FXML_Annotation() {
 
             comboBox_Root.isVisible = true
             comboBox_Root.isDisable = false
+
+            button_AddRepository.isVisible = true
+            button_AddRepository.isDisable = false
 
             removeObject(progressBar_Root)
 

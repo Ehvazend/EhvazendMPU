@@ -7,6 +7,7 @@ import javafx.scene.effect.ColorAdjust
 import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.FXML_Animation.Slider.Direction
 import net.ehvazend.mpu.FXML_Animation.Slider.step
+import net.ehvazend.mpu.Repository
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
@@ -29,7 +30,7 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun button_Test() {
-
+        Repository.repositories()
     }
 
     fun button_Next() {
@@ -46,6 +47,10 @@ class FXML_Controller : FXML_Logic(), Initializable {
             if (it != null) setInstallPath(it)
         }
         RootEffect.play()
+    }
+
+    fun button_AddRepository() {
+
     }
 
     fun checkBox_DefaultPath() {

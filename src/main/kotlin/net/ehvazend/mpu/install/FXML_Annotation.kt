@@ -53,6 +53,9 @@ open class FXML_Annotation {
     protected var button_ChooseDirectory = Button()
 
     @FXML
+    protected var button_AddRepository = Button()
+
+    @FXML
     protected var progressBar_Root = ProgressBar()
 
     @FXML

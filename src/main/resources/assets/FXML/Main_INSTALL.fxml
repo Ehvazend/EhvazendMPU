@@ -4,8 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -15,14 +13,6 @@
       minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0"
       xmlns="http://javafx.com/javafx/8.0.111" fx:controller="net.ehvazend.mpu.install.FXML_Controller">
    <children>
-      <ImageView fx:id="image_Root" fitHeight="250.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-             <Image url="@../deprecated/images/Background.png"/>
-         </image>
-         <effect>
-            <ColorAdjust />
-         </effect>
-      </ImageView>
       <Rectangle fx:id="rectangle_Root" arcHeight="5.0" arcWidth="5.0" height="250.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="600.0">
          <fill>
             <LinearGradient>
@@ -33,18 +23,25 @@
             </LinearGradient>
          </fill>
           <effect>
-              <ColorAdjust brightness="0.25" hue="-1.0" saturation="0.25"/>
+             <ColorAdjust brightness="0.25" hue="-1.0" saturation="0.25"/>
           </effect>
       </Rectangle>
       <VBox fx:id="VBox_Home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0">
          <children>
             <AnchorPane prefHeight="25.0" prefWidth="572.0">
                <children>
-                  <ComboBox fx:id="comboBox_Root" disable="true" minWidth="180.0" onAction="#comboBox_ChangePack" prefWidth="150.0" visible="false" visibleRowCount="5" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </ComboBox>
+                  <HBox AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ComboBox fx:id="comboBox_Root" disable="true" minWidth="180.0" onAction="#comboBox_ChangePack"
+                                  prefHeight="25.0" prefWidth="150.0" visible="false" visibleRowCount="5">
+                           <opaqueInsets>
+                              <Insets/>
+                           </opaqueInsets>
+                        </ComboBox>
+                        <Button fx:id="button_AddRepository" disable="true" mnemonicParsing="false"
+                                onAction="#button_AddRepository" text="+" visible="false"/>
+                     </children>
+                  </HBox>
                   <Button layoutX="514.0" mnemonicParsing="false" onAction="#button_Next" text="%button.next" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
                <VBox.margin>
@@ -88,9 +85,9 @@
                         </AnchorPane>
                         <HBox>
                            <children>
-                               <TextField fx:id="textField_InstallDirectory" editable="false"
-                                          maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                          prefHeight="25.0" prefWidth="544.0"/>
+                              <TextField fx:id="textField_InstallDirectory" editable="false"
+                                         maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                         prefHeight="25.0" prefWidth="544.0"/>
                               <Button fx:id="button_ChooseDirectory" mnemonicParsing="false" onAction="#button_ChooseDirectory" text="...">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -124,19 +121,19 @@
                      <content>
                         <Accordion prefWidth="559.0">
                           <panes>
-                              <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
+                             <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>
                             </TitledPane>
-                              <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false"
-                                          text="%checkBox.improvedGraphics">
+                             <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false"
+                                         text="%checkBox.improvedGraphics">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>
                             </TitledPane>
-                              <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false"
-                                          text="%checkBox.improvedGraphicsPlus">
+                             <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false"
+                                         text="%checkBox.improvedGraphicsPlus">
                                  <content>
                                     <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
                                  </content>

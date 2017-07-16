@@ -22,16 +22,13 @@ object JSON_Handler {
             JSON_DataMPU(
                     it.string("host")!!,
                     it.string("hashProject")!!,
-                    it.string("mode")!!,
                     it.string("nameCoreFile")!!
             )
         }
     }
 
-    fun loaderPack(): ArrayList<JSON_DataPack> {
-        val packs = loaderURL(loaderCore().let {
-            it.host + it.hashProject + it.mode
-        })
+    fun loaderPack(address: String): ArrayList<JSON_DataPack> {
+        val packs = loaderURL(address)
 
         return ArrayList<JSON_DataPack>().also {
             for (value in packs as JsonArray<*>) {

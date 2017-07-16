@@ -57,10 +57,10 @@ class Main : Application() {
 
     enum class Mode(val FXML: String,
                     val STYLE: String = "/assets/Main.css",
-                    val LOGO: String = "/deprecated/images/logo.png",
+                    val LOGO: String = "/assets/images/logo.png",
                     val TITLE: String) {
 
-        INSTALL(FXML = "/assets/Main_INSTALL.fxml", TITLE = "Install"),
-        UPDATE(FXML = "/assets/Main_UPDATE.fxml", TITLE = "Update")
+        INSTALL(FXML = "/assets/FXML/Main_INSTALL.fxml", TITLE = "Install"),
+        UPDATE(FXML = "/assets/FXML/Main_UPDATE.fxml", TITLE = "Update")
     }
 }
