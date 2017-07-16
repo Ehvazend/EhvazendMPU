@@ -1,7 +1,6 @@
 package net.ehvazend.mpu
 
 import com.beust.klaxon.*
-import net.ehvazend.mpu.data.JSON_DataMPU
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
 import java.net.HttpURLConnection
@@ -15,16 +14,6 @@ object JSON_Handler {
 
     fun loaderURL(name: String): Any {
         return (URL(name).openConnection() as HttpURLConnection).inputStream.let { Parser().parse(it) } as Any
-    }
-
-    fun loaderCore(): JSON_DataMPU {
-        return (loaderFile("/assets/DataCore.json") as JsonObject).let {
-            JSON_DataMPU(
-                    it.string("host")!!,
-                    it.string("hashProject")!!,
-                    it.string("nameCoreFile")!!
-            )
-        }
     }
 
     fun loaderPack(address: String): ArrayList<JSON_DataPack> {

@@ -1,12 +1,18 @@
 package net.ehvazend.mpu.install
 
 import javafx.event.ActionEvent
+import javafx.fxml.FXMLLoader
 import javafx.fxml.Initializable
 import javafx.scene.Node
+import javafx.scene.Scene
 import javafx.scene.effect.ColorAdjust
+import javafx.scene.image.Image
+import javafx.stage.Modality
+import javafx.stage.Stage
 import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.FXML_Animation.Slider.Direction
 import net.ehvazend.mpu.FXML_Animation.Slider.step
+import net.ehvazend.mpu.Main
 import net.ehvazend.mpu.Repository
 import java.net.URL
 import java.util.*
@@ -49,8 +55,39 @@ class FXML_Controller : FXML_Logic(), Initializable {
         RootEffect.play()
     }
 
-    fun button_AddRepository() {
+    fun button_AddRepository(actionEvent: ActionEvent) {
+        RootEffect.pause().also {
+            val MODE: Main.Mode = Main.Mode.REPOSITORIES
 
+            val STAGE = Stage()
+            val ROOT = FXMLLoader()
+            val STYLE = javaClass.getResource(MODE.STYLE).toString()
+            val LOGO = Image(javaClass.getResourceAsStream(MODE.LOGO))
+            val TITLE = "MPU: ${MODE.TITLE}"
+
+            // Load resources
+            ROOT.location = javaClass.getResource(MODE.FXML)
+            ROOT.resources = net.ehvazend.mpu.override.ResourceBundle.getBundle("assets.lang.lang", Locale("en"))
+            ROOT.resources = net.ehvazend.mpu.override.ResourceBundle.getBundle("assets.lang.lang", Locale("ru"))
+
+            // Modality
+            STAGE.initModality(Modality.WINDOW_MODAL)
+            STAGE.initOwner((actionEvent.source as Node).scene.window)
+
+            // Set scene
+            STAGE.scene = Scene(ROOT.load(), 590.0, 240.0)
+            STAGE.style
+
+            // Scene parameters
+            STAGE.scene.stylesheets.add(STYLE)
+            STAGE.icons.add(LOGO)
+            STAGE.title = TITLE
+            STAGE.isResizable = false
+
+            // Run
+            STAGE.show()
+            STAGE.setOnCloseRequest { RootEffect.play() }
+        }
     }
 
     fun checkBox_DefaultPath() {

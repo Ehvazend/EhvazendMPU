@@ -27,7 +27,14 @@ open class FXML_Logic : FXML_Annotation() {
         }
 
         fun JSON(): ArrayList<JSON_DataPack> {
-            return JSON_Handler.loaderPack(Repository.repositories()[0])
+            val testList = ArrayList<JSON_DataPack>()
+
+            for (value in Repository.repositories()) {
+                testList.addAll(JSON_Handler.loaderPack(value))
+            }
+
+
+            return testList
         }
     }
 

@@ -61,6 +61,7 @@ class Main : Application() {
                     val TITLE: String) {
 
         INSTALL(FXML = "/assets/FXML/Main_INSTALL.fxml", TITLE = "Install"),
-        UPDATE(FXML = "/assets/FXML/Main_UPDATE.fxml", TITLE = "Update")
+        UPDATE(FXML = "/assets/FXML/Main_UPDATE.fxml", TITLE = "Update"),
+        REPOSITORIES(FXML = "/assets/FXML/Main_REPOSITORIES.fxml", TITLE = "Repositories")
     }
 }
