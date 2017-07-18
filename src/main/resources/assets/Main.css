@@ -62,11 +62,12 @@
 }
 
 .combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
-    -fx-padding: 4px 0px 4px 8px;
+    -fx-background-color: #ffffff;
+    -fx-padding: 4px 8px 4px 8px;
 }
 
 .combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
     -fx-text-fill: #323232;
 }
 .combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover,
@@ -81,4 +82,30 @@
 
 .titled-pane:focused > .title > .arrow-button > .arrow {
     -fx-effect: null;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0px;
+}
+
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #323232;
+}
+
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #323232;
+}
+
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected,
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected:hover{
+    -fx-background-color: #efefef;
+    -fx-text-fill: #323232;
+}
+
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:armed {
+    -fx-background-color: #000;
+    -fx-text-fill: #fff;
 }
