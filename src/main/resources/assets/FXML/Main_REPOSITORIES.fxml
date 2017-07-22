@@ -33,26 +33,26 @@
                <children>
                   <HBox AnchorPane.leftAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" text="%button.add" />
+                        <Button mnemonicParsing="false" onAction="#button_Add" text="%button.add" />
                         <Button mnemonicParsing="false" onAction="#button_Edit" text="%button.edit">
                            <HBox.margin>
                               <Insets left="4.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="%button.delete">
+                        <Button mnemonicParsing="false" onAction="#button_Delete" text="%button.delete">
                            <HBox.margin>
                               <Insets left="4.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="%button.save" AnchorPane.rightAnchor="0.0" />
+                  <Button mnemonicParsing="false" onAction="#button_Save" text="%button.save" AnchorPane.rightAnchor="0.0" />
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </AnchorPane>
-            <ListView fx:id="listView_Root" editable="true" fixedCellSize="25.0" onEditCommit="#listView_RootCommit">
+            <ListView fx:id="listView_Root" editable="true" fixedCellSize="25.0" onEditCancel="#listView_Cancel">
                <VBox.margin>
                   <Insets top="14.0" />
                </VBox.margin>

@@ -94,6 +94,11 @@
     -fx-text-fill: #323232;
 }
 
+.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #323232;
+}
+
 .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
     -fx-background-color: transparent;
     -fx-text-fill: #323232;
@@ -103,9 +108,4 @@
 .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected:hover{
     -fx-background-color: #efefef;
     -fx-text-fill: #323232;
-}
-
-.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:armed {
-    -fx-background-color: #000;
-    -fx-text-fill: #fff;
 }

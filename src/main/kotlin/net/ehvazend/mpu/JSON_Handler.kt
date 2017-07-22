@@ -13,7 +13,7 @@ object JSON_Handler {
     }
 
     fun loaderURL(name: String): Any {
-        return (URL(name).openConnection() as HttpURLConnection).inputStream.let { Parser().parse(it) } as Any
+        return URL(name).openConnection().inputStream.let { Parser().parse(it) } as Any
     }
 
     fun loaderPack(address: String): ArrayList<JSON_DataPack> {

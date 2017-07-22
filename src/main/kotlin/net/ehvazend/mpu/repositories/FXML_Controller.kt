@@ -1,9 +1,7 @@
 package net.ehvazend.mpu.repositories
 
 import javafx.fxml.Initializable
-import javafx.scene.control.ListView
 import javafx.scene.effect.ColorAdjust
-import javafx.scene.input.MouseEvent
 import net.ehvazend.mpu.FXML_Animation
 import java.net.URL
 import java.util.*
@@ -20,12 +18,23 @@ class FXML_Controller : FXML_Logic(), Initializable {
         }
     }
 
-    fun listView_RootCommit(actionEvent: MouseEvent) {
-        (actionEvent.source as ListView<*>)
+    fun button_Add() {
+        add()
     }
 
     fun button_Edit() {
-        listView_Root.edit(listView_Root.selectionModel.selectedIndex)
-        listView_Root.prefHeight(100.0)
+        edit()
+    }
+
+    fun button_Delete() {
+        delete()
+    }
+
+    fun button_Save() {
+
+    }
+
+    fun listView_Cancel() {
+        checkVoid()
     }
 }
