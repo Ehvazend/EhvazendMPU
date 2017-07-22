@@ -12,7 +12,7 @@ import javafx.stage.Window
 import net.ehvazend.mpu.FS_Handler
 import net.ehvazend.mpu.FXML_Animation.Slider
 import net.ehvazend.mpu.JSON_Handler
-import net.ehvazend.mpu.Repository
+import net.ehvazend.mpu.FS_Repository
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
 import java.io.File
@@ -28,7 +28,7 @@ open class FXML_Logic : FXML_Annotation() {
 
         fun JSON(): ArrayList<JSON_DataPack> {
             return ArrayList<JSON_DataPack>().let {
-                for (value in Repository.repositories()) {
+                for (value in FS_Repository.repositories()) {
                     it.addAll(JSON_Handler.loaderPack(value))
                 }
 

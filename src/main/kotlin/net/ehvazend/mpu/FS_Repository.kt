@@ -4,7 +4,7 @@ import java.io.FileNotFoundException
 import java.net.URL
 import java.util.*
 
-object Repository {
+object FS_Repository {
     fun repositories(): ArrayList<String> {
         return ArrayList<String>().also {
             for ((first, second) in Properties().also { it.load(javaClass.getResourceAsStream("/assets/Repositories.properties")) }.toList().reversed()) {

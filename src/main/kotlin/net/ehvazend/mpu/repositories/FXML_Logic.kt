@@ -1,11 +1,11 @@
 package net.ehvazend.mpu.repositories
 
 import javafx.scene.control.cell.TextFieldListCell
-import net.ehvazend.mpu.Repository
+import net.ehvazend.mpu.FS_Repository
 
 open class FXML_Logic : FXML_Annotation() {
     protected fun loadRepositories() {
-        listView_Root.items.addAll(Repository.repositories())
+        listView_Root.items.addAll(FS_Repository.repositories())
     }
 
     protected fun editRepositories() {
@@ -29,11 +29,11 @@ open class FXML_Logic : FXML_Annotation() {
     protected fun edit() {
         listView_Root.also {
             it.edit(listView_Root.selectionModel.selectedIndex)
-            it.setOnEditCancel { Repository.check(listView_Root.items[listView_Root.selectionModel.selectedIndex]) }
+            it.setOnEditCancel { FS_Repository.check(listView_Root.items[listView_Root.selectionModel.selectedIndex]) }
         }
 
         listView_Root.edit(listView_Root.selectionModel.selectedIndex)
-        listView_Root.setOnEditCancel { Repository.check(listView_Root.items[listView_Root.items.size - 1]) }
+        listView_Root.setOnEditCancel { FS_Repository.check(listView_Root.items[listView_Root.items.size - 1]) }
     }
 
     protected fun edit(index: Int) {
