@@ -3,7 +3,6 @@ package net.ehvazend.mpu
 import com.beust.klaxon.*
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
-import java.net.HttpURLConnection
 import java.net.URL
 
 object JSON_Handler {
@@ -25,8 +24,8 @@ object JSON_Handler {
 
                 val pack = JSON_DataPack(
                         value.string("name")!!,
-                        value.string("version")!!,
                         value.string("hash")!!,
+                        value.string("version")!!,
                         stateModules = ArrayList()
                 )
 
