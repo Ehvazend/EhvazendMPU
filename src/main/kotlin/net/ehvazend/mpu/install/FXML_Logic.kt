@@ -27,12 +27,12 @@ open class FXML_Logic : FXML_Annotation() {
         }
 
         fun JSON(): ArrayList<JSON_DataPack> {
-            return ArrayList<JSON_DataPack>().let {
+            ArrayList<JSON_DataPack>().let {
                 for (value in FS_Repository.repositories()) {
                     it.addAll(JSON_Handler.loaderPack(value))
                 }
 
-                it
+                return it
             }
         }
     }

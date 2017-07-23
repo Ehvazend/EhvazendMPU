@@ -13,7 +13,7 @@ import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.FXML_Animation.Slider.Direction
 import net.ehvazend.mpu.FXML_Animation.Slider.step
 import net.ehvazend.mpu.Main
-import net.ehvazend.mpu.FS_Repository
+import net.ehvazend.mpu.JSON_Handler
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
@@ -36,7 +36,7 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun button_Test() {
-        FS_Repository.repositories()
+        JSON_Handler.loaderMod().also { println(it) }
     }
 
     fun button_Next() {
