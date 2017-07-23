@@ -30,11 +30,17 @@ object JSON_Handler {
                         stateModules = ArrayList()
                 )
 
-                for ((key) in value.obj("modules") as JsonObject) {
-                    pack.stateModules.add(JSON_DataModule(
-                            name = key,
-                            state = (value.obj("modules") as JsonObject).boolean(key)!!
-                    ))
+                // load modules
+                for (module in value.array<Any>("modules") as JsonArray) {
+                    (module as JsonObject)
+
+                    module.keys.first().also {
+                        pack.stateModules.add(JSON_DataModule(it, module[it] as Boolean).also {
+                            when {
+                                module[it.name] as Boolean -> it.hash = module.string("hash")
+                            }
+                        })
+                    }
                 }
 
                 it.add(pack)
@@ -42,15 +48,17 @@ object JSON_Handler {
         }
     }
 
-    fun loaderMod(/*hash: String, module: JSON_DataModule*/):ArrayList<JSON_DataMod> {
-        // TODO: Realize address find
-        val mods = loaderURL("https://raw.githubusercontent.com/Ehvazend/RepositoryMPU/master/Repository/Packs/Interrupt_of_Fall/Core.json")
+    fun loaderMod(
+            repository: String = "https://raw.githubusercontent.com/Ehvazend/RepositoryMPU/master/Repository/",
+            hash: String = "Interrupt_of_Fall",
+            module: JSON_DataModule = JSON_DataModule(name = "core", state = true, hash = "Core.json")): ArrayList<JSON_DataMod> {
+        val mods = loaderURL(repository + "Packs/$hash/${module.hash}")
 
         return ArrayList<JSON_DataMod>().also {
             for (value in mods as JsonArray<*>) {
                 (value as JsonObject)
 
-                it.add(JSON_DataMod( value.string("name")!! ))
+                it.add(JSON_DataMod(value.string("name")!!))
             }
         }
     }
