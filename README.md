@@ -1,5 +1,5 @@
 ## EhvazendMPU
-<p align="center">
+<p>
     <a href="LICENSE">
         <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="MIT License">
     </a>
