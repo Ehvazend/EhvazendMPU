@@ -16,14 +16,15 @@ object JSON_Handler {
         return URL(name).openConnection().inputStream.let { Parser().parse(it) } as Any
     }
 
-    fun loaderPack(address: String): ArrayList<JSON_DataPack> {
-        val packs = loaderURL(address)
+    fun loaderPack(address: String, file: String): ArrayList<JSON_DataPack> {
+        val packs = loaderURL(address + file)
 
         return ArrayList<JSON_DataPack>().also {
             for (value in packs as JsonArray<*>) {
                 (value as JsonObject)
 
                 val pack = JSON_DataPack(
+                        address,
                         value.string("name")!!,
                         value.string("hash")!!,
                         value.string("version")!!,
@@ -48,14 +49,9 @@ object JSON_Handler {
         }
     }
 
-    fun loaderMod(
-            repository: String = "https://raw.githubusercontent.com/Ehvazend/RepositoryMPU/master/Repository/",
-            hash: String = "Interrupt_of_Fall",
-            module: JSON_DataModule = JSON_DataModule(name = "core", state = true, hash = "Core.json")): ArrayList<JSON_DataMod> {
-        val mods = loaderURL(repository + "Packs/$hash/${module.hash}")
-
+    fun loaderMod(repository: String, hash: String, module: JSON_DataModule): ArrayList<JSON_DataMod> {
         return ArrayList<JSON_DataMod>().also {
-            for (value in mods as JsonArray<*>) {
+            for (value in loaderURL(repository + "Packs/$hash/${module.hash}") as JsonArray<*>) {
                 (value as JsonObject)
 
                 it.add(JSON_DataMod(value.string("name")!!))

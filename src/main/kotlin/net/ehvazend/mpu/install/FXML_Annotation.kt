@@ -11,7 +11,7 @@ import net.ehvazend.mpu.data.JSON_DataModule
 import java.io.File
 
 open class FXML_Annotation {
-    protected data class ModuleAssociation(val name: String, val listDataModule: ArrayList<JSON_DataModule>)
+    protected data class ModuleAssociation(val repository: String, val name: String, val hash: String, val listDataModule: ArrayList<JSON_DataModule>)
     protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane)
 
     protected val dataModule = ArrayList<ModuleAssociation>()

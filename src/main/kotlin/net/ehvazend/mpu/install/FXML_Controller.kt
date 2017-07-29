@@ -21,7 +21,7 @@ import kotlin.concurrent.thread
 class FXML_Controller : FXML_Logic(), Initializable {
     // Initialization in JavaFX Threat
     override fun initialize(location: URL, resources: ResourceBundle) {
-        //Variable late initialization
+        // Variable late initialization
         bindingCore = StateAssociation(checkBox_Core, titledPane_Core)
         bindingImprovedGraphics = StateAssociation(checkBox_ImprovedGraphics, titledPane_ImprovedGraphics)
         bindingImprovedGraphicsPlus = StateAssociation(checkBox_ImprovedGraphicsPlus, titledPane_ImprovedGraphicsPlus)
@@ -36,7 +36,7 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun button_Test() {
-        JSON_Handler.loaderMod().also { println(it) }
+        println("Test")
     }
 
     fun button_Next() {

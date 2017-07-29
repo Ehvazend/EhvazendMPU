@@ -26,14 +26,12 @@ open class FXML_Logic : FXML_Annotation() {
             }
         }
 
-        fun JSON(): ArrayList<JSON_DataPack> {
-            ArrayList<JSON_DataPack>().let {
-                for (value in FS_Repository.repositories()) {
-                    it.addAll(JSON_Handler.loaderPack(value + "Packs.json"))
-                }
-
-                return it
+        fun JSON(): ArrayList<JSON_DataPack> = ArrayList<JSON_DataPack>().let {
+            for (value in FS_Repository.repositories()) {
+                it.addAll(JSON_Handler.loaderPack(value, "Packs.json"))
             }
+
+            return it
         }
     }
 
@@ -45,13 +43,15 @@ open class FXML_Logic : FXML_Annotation() {
     protected fun loadEnded(dataPack: ArrayList<JSON_DataPack>) {
         // Update value
         fun packingDataModule() {
-            dataPack.mapTo(dataModule) { ModuleAssociation(it.name, it.stateModules) }
+            dataPack.mapTo(dataModule) { ModuleAssociation(it.repository, it.name, it.hash, it.stateModules) }
         }
 
         Platform.runLater {
             packingDataModule()
 
-            for ((name) in dataPack) comboBox_Root.items.add(name)
+            for ((_, name) in dataPack) {
+                comboBox_Root.items.add(name)
+            }
 
             // Also call event comboBox_ChangePack -> setStatePack
             comboBox_Root.value = dataPack[0].name
@@ -71,25 +71,35 @@ open class FXML_Logic : FXML_Annotation() {
     }
 
     // State ---------------------------
-    protected fun setStatePack(name: String) {
-        fun update(dataModule: JSON_DataModule) {
+    protected fun setStatePack(value: String) {
+        fun update(repository: String, hash: String, dataModule: JSON_DataModule) {
             when (dataModule.name) {
                 "core" -> {
                     setState(checkBox_Core, !dataModule.state)
+                    when {
+                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                    }
                 }
                 "improvedGraphics" -> {
                     setState(checkBox_ImprovedGraphics, !dataModule.state)
+                    when {
+                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                    }
                 }
                 "improvedGraphicsPlus" -> {
                     setState(checkBox_ImprovedGraphicsPlus, !dataModule.state)
+                    when {
+                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                    }
                 }
             }
         }
 
-        dataModule
-                .filter { it.name == name }
-                .flatMap { it.listDataModule }
-                .forEach { update(it) }
+        for ((repository, name, hash, listDataModule) in dataModule) {
+            when (name) {
+                value -> listDataModule.forEach { update(repository, hash, it) }
+            }
+        }
     }
 
     protected fun setState(node: CheckBox, disable: Boolean = node.isDisable, selected: Boolean = node.isSelected) {
