@@ -125,28 +125,32 @@
                <children>
                   <ScrollPane pannable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <Accordion prefWidth="559.0">
-                          <panes>
-                             <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
-                                 <content>
-                                    <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
-                                 </content>
-                            </TitledPane>
-                             <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false" text="%checkBox.improvedGraphics">
-                                 <content>
-                                    <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
-                                 </content>
-                            </TitledPane>
-                             <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false" text="%checkBox.improvedGraphicsPlus">
-                                 <content>
-                                    <Pane prefHeight="200.0" style="-fx-background-color: #efefef;" />
-                                 </content>
-                            </TitledPane>
-                          </panes>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </Accordion>
+                        <AnchorPane>
+                           <children>
+                              <Accordion prefWidth="559.0">
+                                <panes>
+                                   <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
+                                       <content>
+                                          <AnchorPane />
+                                       </content>
+                                  </TitledPane>
+                                   <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false" text="%checkBox.improvedGraphics">
+                                       <content>
+                                          <AnchorPane />
+                                       </content>
+                                  </TitledPane>
+                                   <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false" text="%checkBox.improvedGraphicsPlus">
+                                       <content>
+                                          <AnchorPane />
+                                       </content>
+                                  </TitledPane>
+                                </panes>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </Accordion>
+                           </children>
+                        </AnchorPane>
                      </content>
                   </ScrollPane>
                </children>

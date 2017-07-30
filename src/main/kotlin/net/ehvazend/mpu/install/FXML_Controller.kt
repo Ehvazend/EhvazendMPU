@@ -13,7 +13,6 @@ import net.ehvazend.mpu.FXML_Animation
 import net.ehvazend.mpu.FXML_Animation.Slider.Direction
 import net.ehvazend.mpu.FXML_Animation.Slider.step
 import net.ehvazend.mpu.Main
-import net.ehvazend.mpu.JSON_Handler
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
@@ -22,9 +21,10 @@ class FXML_Controller : FXML_Logic(), Initializable {
     // Initialization in JavaFX Threat
     override fun initialize(location: URL, resources: ResourceBundle) {
         // Variable late initialization
-        bindingCore = StateAssociation(checkBox_Core, titledPane_Core)
-        bindingImprovedGraphics = StateAssociation(checkBox_ImprovedGraphics, titledPane_ImprovedGraphics)
-        bindingImprovedGraphicsPlus = StateAssociation(checkBox_ImprovedGraphicsPlus, titledPane_ImprovedGraphicsPlus)
+        binding_Core = StateAssociation(checkBox_Core, titledPane_Core)
+        binding_ImprovedGraphics = StateAssociation(checkBox_ImprovedGraphics, titledPane_ImprovedGraphics)
+        binding_ImprovedGraphicsPlus = StateAssociation(checkBox_ImprovedGraphicsPlus, titledPane_ImprovedGraphicsPlus)
+
         RootEffect = FXML_Animation.Timeline((rectangle_Root.effect as ColorAdjust).hueProperty(), value = 1.0, duration = 20.0)
 
         thread(name = "Initialize") {
@@ -99,18 +99,18 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun checkBox_Core() {
-        refreshState(checkBox_Core)
+        refreshState(binding_Core)
     }
 
     fun checkBox_ImprovedGraphics() {
-        refreshState(checkBox_ImprovedGraphics)
+        refreshState(binding_ImprovedGraphics)
     }
 
     fun checkBox_ImprovedGraphicsPlus() {
-        refreshState(checkBox_ImprovedGraphicsPlus)
+        refreshState(binding_ImprovedGraphicsPlus)
     }
 
     fun comboBox_ChangePack() {
-        setStatePack(comboBox_Root.value)
+        setState(comboBox_Root.value)
     }
 }

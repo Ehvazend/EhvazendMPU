@@ -5,6 +5,7 @@
 * {
     -fx-background-radius: 0;
     -fx-background-insets: 0;
+    -fx-border-insets: 0;
     -fx-font-family: 'Minecraft';
     -fx-font-smoothing-type: lcd;
 }
@@ -82,6 +83,11 @@
 
 .titled-pane:focused > .title > .arrow-button > .arrow {
     -fx-effect: null;
+}
+
+.titled-pane > .content {
+    -fx-background-color: #efefef;
+    -fx-box-border: #efefef;
 }
 
 .list-view {

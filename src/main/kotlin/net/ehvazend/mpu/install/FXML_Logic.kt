@@ -3,7 +3,7 @@ package net.ehvazend.mpu.install
 import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Node
-import javafx.scene.control.CheckBox
+import javafx.scene.control.ProgressBar
 import javafx.scene.control.TextInputControl
 import javafx.stage.DirectoryChooser
 import javafx.stage.Modality
@@ -13,9 +13,12 @@ import net.ehvazend.mpu.FS_Handler
 import net.ehvazend.mpu.FS_Repository
 import net.ehvazend.mpu.FXML_Animation.Slider
 import net.ehvazend.mpu.JSON_Handler
+import net.ehvazend.mpu.JSON_Handler.loaderMod
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
+import net.ehvazend.mpu.install.FXML_Annotation.State_TitledPane.*
 import java.io.File
+import kotlin.concurrent.thread
 
 open class FXML_Logic : FXML_Annotation() {
     protected object Initialization : FXML_Logic() {
@@ -53,7 +56,7 @@ open class FXML_Logic : FXML_Annotation() {
                 comboBox_Root.items.add(name)
             }
 
-            // Also call event comboBox_ChangePack -> setStatePack
+            // Also call event comboBox_ChangePack -> setState
             comboBox_Root.value = dataPack[0].name
 
             comboBox_Root.isVisible = true
@@ -71,26 +74,52 @@ open class FXML_Logic : FXML_Annotation() {
     }
 
     // State ---------------------------
-    protected fun setStatePack(value: String) {
+    protected fun setState(value: String) {
         fun update(repository: String, hash: String, dataModule: JSON_DataModule) {
             when (dataModule.name) {
                 "core" -> {
-                    setState(checkBox_Core, !dataModule.state)
+                    binding_Core.checkBox.isDisable = !dataModule.state
                     when {
-                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                        dataModule.state -> thread {
+                            Platform.runLater {
+                                refreshState(binding_Core, LOADING)
+                                loaderMod(repository, hash, module = dataModule)
+                                refreshState(binding_Core, DISABLE)
+                            }
+                        }
                     }
+
+                    refreshState(binding_Core)
                 }
+
                 "improvedGraphics" -> {
-                    setState(checkBox_ImprovedGraphics, !dataModule.state)
+                    binding_ImprovedGraphics.checkBox.isDisable = !dataModule.state
                     when {
-                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                        dataModule.state -> thread {
+                            Platform.runLater {
+                                refreshState(binding_ImprovedGraphics, LOADING)
+                                loaderMod(repository, hash, module = dataModule)
+                                refreshState(binding_ImprovedGraphics, DISABLE)
+                            }
+                        }
                     }
+
+                    refreshState(binding_ImprovedGraphics)
                 }
+
                 "improvedGraphicsPlus" -> {
-                    setState(checkBox_ImprovedGraphicsPlus, !dataModule.state)
+                    binding_ImprovedGraphicsPlus.checkBox.isDisable = !dataModule.state
                     when {
-                        dataModule.state -> JSON_Handler.loaderMod(repository, hash, module = dataModule)
+                        dataModule.state -> thread {
+                            Platform.runLater {
+                                refreshState(binding_ImprovedGraphicsPlus, LOADING)
+                                loaderMod(repository, hash, module = dataModule)
+                                refreshState(binding_ImprovedGraphicsPlus, DISABLE)
+                            }
+                        }
                     }
+
+                    refreshState(binding_ImprovedGraphicsPlus)
                 }
             }
         }
@@ -102,31 +131,33 @@ open class FXML_Logic : FXML_Annotation() {
         }
     }
 
-    protected fun setState(node: CheckBox, disable: Boolean = node.isDisable, selected: Boolean = node.isSelected) {
-        node.isDisable = disable
-        node.isSelected = selected
-
-        refreshState(node)
-    }
-
-    protected fun refreshState(node: CheckBox) {
-        fun check(state: StateAssociation) {
-            when {
-                state.checkBox.isDisable -> {
-                    state.titledPane.isDisable = state.checkBox.isDisable
-                    if (state.checkBox.isDisable) titledPane_Core.isExpanded = false
-                }
-                else -> {
-                    state.titledPane.isDisable = !state.checkBox.isSelected
-                    if (!state.checkBox.isSelected) titledPane_Core.isExpanded = false
-                }
-            }
+    protected fun refreshState(value: StateAssociation, STATE: State_TitledPane? = null) {
+        when {
+            STATE != null -> value.STATE = STATE
         }
 
-        when (node) {
-            bindingCore.checkBox -> check(bindingCore)
-            bindingImprovedGraphics.checkBox -> check(bindingImprovedGraphics)
-            bindingImprovedGraphicsPlus.checkBox -> check(bindingImprovedGraphicsPlus)
+        when {
+            value.STATE == LOADING -> Unit
+            value.checkBox.isDisable -> value.STATE = DISABLE
+            value.checkBox.isSelected -> value.STATE = ENABLE
+            else -> value.STATE = DISABLE
+        }
+
+        when(value.STATE) {
+            DISABLE -> {
+                value.titledPane.isDisable = true
+                value.titledPane.graphic = null
+                value.titledPane.isExpanded = false
+            }
+            LOADING -> {
+                value.titledPane.isDisable = true
+                value.titledPane.graphic = ProgressBar()
+                value.titledPane.isExpanded = false
+            }
+            ENABLE -> {
+                value.titledPane.isDisable = false
+                value.titledPane.graphic = null
+            }
         }
     }
     // ---------------------------------

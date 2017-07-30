@@ -11,8 +11,10 @@ import net.ehvazend.mpu.data.JSON_DataModule
 import java.io.File
 
 open class FXML_Annotation {
+    protected enum class State_TitledPane { DISABLE, LOADING, ENABLE }
+
     protected data class ModuleAssociation(val repository: String, val name: String, val hash: String, val listDataModule: ArrayList<JSON_DataModule>)
-    protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane)
+    protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane, var STATE: State_TitledPane = State_TitledPane.DISABLE)
 
     protected val dataModule = ArrayList<ModuleAssociation>()
 
@@ -24,9 +26,9 @@ open class FXML_Annotation {
 
     protected lateinit var RootEffect: Timeline
 
-    protected lateinit var bindingCore: StateAssociation
-    protected lateinit var bindingImprovedGraphics: StateAssociation
-    protected lateinit var bindingImprovedGraphicsPlus: StateAssociation
+    protected lateinit var binding_Core: StateAssociation
+    protected lateinit var binding_ImprovedGraphics: StateAssociation
+    protected lateinit var binding_ImprovedGraphicsPlus: StateAssociation
 
     @FXML
     protected var pane_Root = Pane()
