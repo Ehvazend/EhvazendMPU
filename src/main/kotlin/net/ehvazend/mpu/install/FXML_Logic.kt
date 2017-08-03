@@ -1,10 +1,11 @@
 package net.ehvazend.mpu.install
 
 import javafx.application.Platform
+import javafx.geometry.Orientation
 import javafx.scene.Group
 import javafx.scene.Node
-import javafx.scene.control.ProgressBar
-import javafx.scene.control.TextInputControl
+import javafx.scene.control.*
+import javafx.scene.layout.VBox
 import javafx.stage.DirectoryChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -14,6 +15,7 @@ import net.ehvazend.mpu.FS_Repository
 import net.ehvazend.mpu.FXML_Animation.Slider
 import net.ehvazend.mpu.JSON_Handler
 import net.ehvazend.mpu.JSON_Handler.loaderMod
+import net.ehvazend.mpu.data.JSON_DataMod
 import net.ehvazend.mpu.data.JSON_DataModule
 import net.ehvazend.mpu.data.JSON_DataPack
 import net.ehvazend.mpu.install.FXML_Annotation.State_TitledPane.*
@@ -76,6 +78,21 @@ open class FXML_Logic : FXML_Annotation() {
     // State ---------------------------
     protected fun setState(value: String) {
         fun update(repository: String, hash: String, dataModule: JSON_DataModule) {
+            fun setTitledPane(arrayList: ArrayList<JSON_DataMod>, titledPane: TitledPane) {
+                val VBox = VBox(6.0)
+
+                VBox.children.add(Separator(Orientation.HORIZONTAL))
+
+                for ((name) in arrayList) {
+                    VBox.children.add(CheckBox(name).also { it.isSelected = true })
+                }
+
+                VBox.children.add(Separator(Orientation.HORIZONTAL))
+
+                titledPane.content = VBox
+            }
+
+
             when (dataModule.name) {
                 "core" -> {
                     binding_Core.checkBox.isDisable = !dataModule.state
@@ -83,7 +100,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_Core, LOADING)
-                                loaderMod(repository, hash, module = dataModule)
+                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_Core) }
                                 refreshState(binding_Core, DISABLE)
                             }
                         }
@@ -98,7 +115,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphics, LOADING)
-                                loaderMod(repository, hash, module = dataModule)
+                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphics) }
                                 refreshState(binding_ImprovedGraphics, DISABLE)
                             }
                         }
@@ -113,7 +130,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphicsPlus, LOADING)
-                                loaderMod(repository, hash, module = dataModule)
+                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphicsPlus) }
                                 refreshState(binding_ImprovedGraphicsPlus, DISABLE)
                             }
                         }

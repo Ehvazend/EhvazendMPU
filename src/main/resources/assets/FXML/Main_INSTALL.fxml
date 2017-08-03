@@ -129,21 +129,9 @@
                            <children>
                               <Accordion prefWidth="559.0">
                                 <panes>
-                                   <TitledPane fx:id="titledPane_Core" disable="true" expanded="false" text="%checkBox.core">
-                                       <content>
-                                          <AnchorPane />
-                                       </content>
-                                  </TitledPane>
-                                   <TitledPane fx:id="titledPane_ImprovedGraphics" disable="true" expanded="false" text="%checkBox.improvedGraphics">
-                                       <content>
-                                          <AnchorPane />
-                                       </content>
-                                  </TitledPane>
-                                   <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" disable="true" expanded="false" text="%checkBox.improvedGraphicsPlus">
-                                       <content>
-                                          <AnchorPane />
-                                       </content>
-                                  </TitledPane>
+                                   <TitledPane fx:id="titledPane_Core" animated="false" disable="true" expanded="false" text="%checkBox.core" />
+                                   <TitledPane fx:id="titledPane_ImprovedGraphics" animated="false" disable="true" expanded="false" text="%checkBox.improvedGraphics" />
+                                   <TitledPane fx:id="titledPane_ImprovedGraphicsPlus" animated="false" disable="true" expanded="false" text="%checkBox.improvedGraphicsPlus" />
                                 </panes>
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />

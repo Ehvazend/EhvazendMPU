@@ -90,6 +90,14 @@
     -fx-box-border: #efefef;
 }
 
+.titled-pane > .content > * {
+    -fx-padding: 6px 12px;
+}
+
+.separator {
+    -fx-background-color: #323232;
+}
+
 .list-view {
     -fx-background-color: transparent;
     -fx-padding: 0px;
