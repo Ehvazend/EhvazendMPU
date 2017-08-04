@@ -149,8 +149,9 @@
          <children>
             <AnchorPane prefHeight="25.0" prefWidth="572.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#button_Past" text="%button.back" AnchorPane.leftAnchor="0.0" />
-                  <Button mnemonicParsing="false" onAction="#button_Install" text="%button.install" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="button_Past" mnemonicParsing="false" onAction="#button_Past" text="%button.back" AnchorPane.leftAnchor="0.0" />
+                  <Button fx:id="button_Next" disable="true" mnemonicParsing="false" onAction="#button_Next" text="%button.next" visible="false" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="button_Install" mnemonicParsing="false" onAction="#button_Install" text="%button.install" AnchorPane.rightAnchor="0.0" />
                </children>
                <VBox.margin>
                   <Insets left="14.0" right="14.0" />
@@ -168,7 +169,7 @@
                               <Insets bottom="8.0" />
                            </VBox.margin>
                            <children>
-                              <TextArea disable="true" editable="false" focusTraversable="false" prefHeight="172.0" prefWidth="572.0" text="%TextArea.install" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TextArea fx:id="textArea_Install" disable="true" editable="false" focusTraversable="false" prefHeight="172.0" prefWidth="572.0" text="%TextArea.install" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>

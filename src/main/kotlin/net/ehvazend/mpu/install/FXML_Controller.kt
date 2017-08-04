@@ -95,7 +95,16 @@ class FXML_Controller : FXML_Logic(), Initializable {
     }
 
     fun button_Install() {
-
+        when {
+            FXML_Animation.Slider.process -> Unit
+            else -> {
+                thread {
+                    installMode(true)
+                    install(currentPath, catchingMode = true, node = textArea_Install)
+                    installMode(false)
+                }
+            }
+        }
     }
 
     fun checkBox_Core() {

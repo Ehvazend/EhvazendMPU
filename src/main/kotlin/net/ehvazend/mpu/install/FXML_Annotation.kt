@@ -85,4 +85,16 @@ open class FXML_Annotation {
 
     @FXML
     protected var checkBox_DefaultPath = CheckBox()
+
+    @FXML
+    protected var button_Past = Button()
+
+    @FXML
+    protected var button_Next = Button()
+
+    @FXML
+    protected var button_Install = Button()
+
+    @FXML
+    protected var textArea_Install = TextArea()
 }

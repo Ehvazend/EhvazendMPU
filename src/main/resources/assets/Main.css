@@ -58,8 +58,12 @@
     -fx-cursor: HAND;
 }
 
-.text-area > .scroll-pane:fitToWidth:fitToHeight > .viewport > .content {
-    -fx-padding: 0px;
+.text-area {
+    -fx-background-color: #efefef;
+}
+
+.text-area .content {
+    -fx-padding: 4px 6px;
 }
 
 .combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {

@@ -8,9 +8,10 @@ import javafx.util.Duration
 object FXML_Animation {
 
     object Slider {
-        private val listSlides = ArrayList<Node>()
+        var process = false
+
         private var activeSlideNumber = 0
-        private var process = false
+        private val listSlides = ArrayList<Node>()
 
         fun addSlide(slide: Node) {
             listSlides.add(slide)
