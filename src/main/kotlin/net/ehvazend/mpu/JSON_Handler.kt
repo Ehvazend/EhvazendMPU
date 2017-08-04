@@ -26,8 +26,9 @@ object JSON_Handler {
                 val pack = JSON_DataPack(
                         address,
                         value.string("name")!!,
-                        value.string("hash")!!,
+                        value.string("hashName")!!,
                         value.string("version")!!,
+                        value.string("hashVersion")!!,
                         stateModules = ArrayList()
                 )
 

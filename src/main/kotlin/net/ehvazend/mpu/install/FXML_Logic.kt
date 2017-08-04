@@ -48,7 +48,7 @@ open class FXML_Logic : FXML_Annotation() {
     protected fun loadEnded(dataPack: ArrayList<JSON_DataPack>) {
         // Update value
         fun packingDataModule() {
-            dataPack.mapTo(dataModule) { ModuleAssociation(it.repository, it.name, it.hash, it.stateModules) }
+            dataPack.mapTo(dataModule) { ModuleAssociation(it.repository, it.name, it.hashName, it.stateModules) }
         }
 
         Platform.runLater {
@@ -218,7 +218,24 @@ open class FXML_Logic : FXML_Annotation() {
     }
     // ---------------------------------
 
-    protected fun install(directory: File, catchingMode: Boolean = false, node: TextInputControl? = null): Boolean {
+    protected fun installMode(mode: Boolean) = when (mode) {
+        true -> {
+            button_Past.isDisable = true
+            button_Install.isDisable = true
+
+            textArea_Install.isDisable = false
+            textArea_Install.text = ""
+        }
+        false -> {
+            button_Install.isDisable = true
+            button_Install.isVisible = false
+
+            button_Next.isDisable = false
+            button_Next.isVisible = true
+        }
+    }
+
+    protected fun install(directory: File, catchingMode: Boolean = false, node: TextInputControl? = null) {
         fun concatenationPath(nameFile: String): File {
             return File("$directory\\" + nameFile)
         }
@@ -232,10 +249,8 @@ open class FXML_Logic : FXML_Annotation() {
             if (catchingMode && node != null && modeShort) node.appendText(separationPath(value) + "\n")
         }
 
-        catchingValue(FS_Handler.createDirectory(directory))
-        catchingValue(FS_Handler.createFile(concatenationPath("config.json")), true)
-        catchingValue(FS_Handler.copyCore(directory), true)
-
-        return true
+        FS_Handler.createDirectory(directory).also { catchingValue(it) }
+        FS_Handler.createFile(concatenationPath("config.json")).also { catchingValue(it, true) }
+        FS_Handler.copyCore(directory).also { catchingValue(it, true) }
     }
 }
