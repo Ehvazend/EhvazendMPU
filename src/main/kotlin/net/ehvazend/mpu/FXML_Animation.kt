@@ -8,8 +8,9 @@ import javafx.util.Duration
 object FXML_Animation {
 
     object Slider {
-        private var activeSlideNumber = 0
         private val listSlides = ArrayList<Node>()
+        private var activeSlideNumber = 0
+        private var process = false
 
         fun addSlide(slide: Node) {
             listSlides.add(slide)
@@ -24,6 +25,7 @@ object FXML_Animation {
 
             // Exception block without crash
             when {
+                process -> println("Reloading")
                 listSlides.isEmpty() -> println("Node List cannot be empty")
                 (activeSlideNumber + newActiveSlideNumber) == -1 -> println("Active Node Number cannot be -1")
                 (activeSlideNumber + newActiveSlideNumber) == activeSlideNumber -> println("Active Node Number cannot be unchanged")
@@ -59,7 +61,8 @@ object FXML_Animation {
             transition.duration = duration
             transition.interpolator = Interpolator.SPLINE(DX, DY, DY, DX)
             transition.toX = coordinate
-            transition.play()
+            transition.play().also { process = true }
+            transition.setOnFinished { process = false }
         }
     }
 
