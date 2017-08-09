@@ -39,7 +39,9 @@ object JSON_Handler {
                     module.keys.first().also {
                         pack.stateModules.add(JSON_DataModule(it, module[it] as Boolean).also {
                             when {
-                                module[it.name] as Boolean -> it.hash = module.string("hash")
+                                module[it.name] as Boolean -> {
+                                    it.hash = module.string("hash")
+                                    it.mods = ArrayList<JSON_DataMod>() }
                             }
                         })
                     }

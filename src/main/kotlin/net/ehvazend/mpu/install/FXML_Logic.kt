@@ -40,6 +40,10 @@ open class FXML_Logic : FXML_Annotation() {
         }
     }
 
+    protected fun isVision(node: Node, isVisible: Boolean = node.isVisible, isDisable: Boolean = node.isDisable) {
+        node.also { it.isVisible = isVisible; it.isDisable = isDisable }
+    }
+
     protected fun removeObject(node: Node) {
         Group().children.add(node)
     }
@@ -48,7 +52,7 @@ open class FXML_Logic : FXML_Annotation() {
     protected fun loadEnded(dataPack: ArrayList<JSON_DataPack>) {
         // Update value
         fun packingDataModule() {
-            dataPack.mapTo(dataModule) { ModuleAssociation(it.repository, it.name, it.hashName, it.stateModules) }
+            dataPack.mapTo(this.dataPacks) { it }
         }
 
         Platform.runLater {
@@ -61,30 +65,29 @@ open class FXML_Logic : FXML_Annotation() {
             // Also call event comboBox_ChangePack -> setState
             comboBox_Root.value = dataPack[0].name
 
-            comboBox_Root.isVisible = true
-            comboBox_Root.isDisable = false
-
-            button_AddRepository.isVisible = true
-            button_AddRepository.isDisable = false
+            isVision(comboBox_Root, true, false)
+            isVision(button_AddRepository, true, false)
 
             removeObject(progressBar_Root)
 
-            checkBox_Core.isVisible = true
-            checkBox_ImprovedGraphics.isVisible = true
-            checkBox_ImprovedGraphicsPlus.isVisible = true
+            isVision(checkBox_Core, true)
+            isVision(checkBox_ImprovedGraphics, true)
+            isVision(checkBox_ImprovedGraphicsPlus, true)
         }
     }
 
     // State ---------------------------
     protected fun setState(value: String) {
-        fun update(repository: String, hash: String, dataModule: JSON_DataModule) {
+        fun update(pack: JSON_DataPack, dataModule: JSON_DataModule) {
             fun setTitledPane(arrayList: ArrayList<JSON_DataMod>, titledPane: TitledPane) {
                 val VBox = VBox(6.0)
 
                 VBox.children.add(Separator(Orientation.HORIZONTAL))
 
-                for ((name) in arrayList) {
-                    VBox.children.add(CheckBox(name).also { it.isSelected = true })
+                for (mod in arrayList) {
+                    VBox.children.add(CheckBox(mod.name).also { it.isSelected = true; it.setOnAction {
+                        mod.state = (it.source as CheckBox).isSelected
+                    } })
                 }
 
                 VBox.children.add(Separator(Orientation.HORIZONTAL))
@@ -100,7 +103,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_Core, LOADING)
-                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_Core) }
+                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_Core = it; setTitledPane(it, titledPane_Core) }
                                 refreshState(binding_Core, DISABLE)
                             }
                         }
@@ -115,7 +118,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphics, LOADING)
-                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphics) }
+                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_ImprovedGraphics = it; setTitledPane(it, titledPane_ImprovedGraphics) }
                                 refreshState(binding_ImprovedGraphics, DISABLE)
                             }
                         }
@@ -130,7 +133,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphicsPlus, LOADING)
-                                loaderMod(repository, hash, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphicsPlus) }
+                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_ImprovedGraphicsPlus = it; setTitledPane(it, titledPane_ImprovedGraphicsPlus) }
                                 refreshState(binding_ImprovedGraphicsPlus, DISABLE)
                             }
                         }
@@ -141,9 +144,10 @@ open class FXML_Logic : FXML_Annotation() {
             }
         }
 
-        for ((repository, name, hash, listDataModule) in dataModule) {
-            when (name) {
-                value -> listDataModule.forEach { update(repository, hash, it) }
+        for (pack: JSON_DataPack in dataPacks) when(pack.name) {
+            value -> {
+                currentDataPack = pack
+                pack.stateModules.forEach { update(pack, it) }
             }
         }
     }
