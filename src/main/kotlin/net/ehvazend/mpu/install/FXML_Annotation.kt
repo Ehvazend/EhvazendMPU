@@ -7,24 +7,28 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import javafx.scene.shape.Rectangle
-import net.ehvazend.mpu.data.JSON_DataModule
+import net.ehvazend.mpu.data.JSON_DataMod
+import net.ehvazend.mpu.data.JSON_DataPack
 import java.io.File
 
 open class FXML_Annotation {
-    protected enum class State_TitledPane { DISABLE, LOADING, ENABLE }
-
-    protected data class ModuleAssociation(val repository: String, val name: String, val hash: String, val listDataModule: ArrayList<JSON_DataModule>)
-    protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane, var STATE: State_TitledPane = State_TitledPane.DISABLE)
-
-    protected val dataModule = ArrayList<ModuleAssociation>()
-
     protected val NAME = "EhvazendMPU"
+
+    protected lateinit var RootEffect: Timeline
 
     protected val defaultPath = File("${System.getProperty("user.home")}\\AppData\\Roaming")
     protected lateinit var currentPath: File
     protected lateinit var bufferPath: File
 
-    protected lateinit var RootEffect: Timeline
+    protected val dataPacks = ArrayList<JSON_DataPack>()
+    protected lateinit var currentDataPack: JSON_DataPack
+
+    protected enum class State_TitledPane { DISABLE, LOADING, ENABLE }
+    protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane, var STATE: State_TitledPane = State_TitledPane.DISABLE)
+
+    protected lateinit var currentMods_Core: ArrayList<JSON_DataMod>
+    protected lateinit var currentMods_ImprovedGraphics: ArrayList<JSON_DataMod>
+    protected lateinit var currentMods_ImprovedGraphicsPlus: ArrayList<JSON_DataMod>
 
     protected lateinit var binding_Core: StateAssociation
     protected lateinit var binding_ImprovedGraphics: StateAssociation
