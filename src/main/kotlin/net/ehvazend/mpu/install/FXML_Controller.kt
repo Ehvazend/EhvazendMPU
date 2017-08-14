@@ -100,7 +100,7 @@ class FXML_Controller : FXML_Logic(), Initializable {
             else -> {
                 thread {
                     installMode(true)
-                    install(currentPath, catchingMode = true, node = textArea_Install)
+                    install(currentPath, node = textArea_Install)
                     installMode(false)
                 }
             }

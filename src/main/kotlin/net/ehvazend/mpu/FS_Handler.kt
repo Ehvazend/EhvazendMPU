@@ -26,11 +26,12 @@ object FS_Handler {
         return jarPath.copyTo(File("$directory\\" + jarPath.name)).toString()
     }
 
-    fun loadingFile(address: String, path: String) {
-        URL(address).openConnection().also {
-            it.getHeaderField("content-disposition")
-            FileOutputStream(File(path, StringTokenizer(it.url.file, "/").toList().last() as String))
-                    .channel.transferFrom(Channels.newChannel(it.getInputStream()), 0, Long.MAX_VALUE)
+    fun loadingFile(address: String, path: String): File {
+        URL(address).openConnection().let { it_ ->
+            it_.getHeaderField("content-disposition")
+            return File(path, StringTokenizer(it_.url.file, "/").toList().last() as String).also {
+                FileOutputStream(it).channel.transferFrom(Channels.newChannel(it_.getInputStream()), 0, Long.MAX_VALUE)
+            }
         }
     }
 }

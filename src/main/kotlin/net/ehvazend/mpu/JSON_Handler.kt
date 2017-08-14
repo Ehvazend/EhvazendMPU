@@ -41,7 +41,8 @@ object JSON_Handler {
                             when {
                                 module[it.name] as Boolean -> {
                                     it.hash = module.string("hash")
-                                    it.mods = ArrayList<JSON_DataMod>() }
+                                    it.mods = ArrayList<JSON_DataMod>()
+                                }
                             }
                         })
                     }
@@ -57,7 +58,7 @@ object JSON_Handler {
             for (value in loaderURL(repository + "Packs/$hash/${module.hash}") as JsonArray<*>) {
                 (value as JsonObject)
 
-                it.add(JSON_DataMod(value.string("name")!!))
+                it.add(JSON_DataMod(value.string("name")!!, value.string("hashName")!!))
             }
         }
     }

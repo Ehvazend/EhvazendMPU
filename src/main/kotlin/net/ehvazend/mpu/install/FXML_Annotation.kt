@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView
 import javafx.scene.layout.Pane
 import javafx.scene.layout.VBox
 import javafx.scene.shape.Rectangle
+import javafx.scene.text.Text
 import net.ehvazend.mpu.data.JSON_DataMod
 import net.ehvazend.mpu.data.JSON_DataPack
 import java.io.File
@@ -26,9 +27,9 @@ open class FXML_Annotation {
     protected enum class State_TitledPane { DISABLE, LOADING, ENABLE }
     protected data class StateAssociation(val checkBox: CheckBox, val titledPane: TitledPane, var STATE: State_TitledPane = State_TitledPane.DISABLE)
 
-    protected lateinit var currentMods_Core: ArrayList<JSON_DataMod>
-    protected lateinit var currentMods_ImprovedGraphics: ArrayList<JSON_DataMod>
-    protected lateinit var currentMods_ImprovedGraphicsPlus: ArrayList<JSON_DataMod>
+    protected var currentMods_Core = ArrayList<JSON_DataMod>()
+    protected var currentMods_ImprovedGraphics = ArrayList<JSON_DataMod>()
+    protected var currentMods_ImprovedGraphicsPlus = ArrayList<JSON_DataMod>()
 
     protected lateinit var binding_Core: StateAssociation
     protected lateinit var binding_ImprovedGraphics: StateAssociation
@@ -101,4 +102,16 @@ open class FXML_Annotation {
 
     @FXML
     protected var textArea_Install = TextArea()
+
+    @FXML
+    protected var progressBar_Install = ProgressBar()
+
+    @FXML
+    protected var text_ValueOne = Text()
+
+    @FXML
+    protected var text_ValueSeparator = Text()
+
+    @FXML
+    protected var text_ValueTwo = Text()
 }

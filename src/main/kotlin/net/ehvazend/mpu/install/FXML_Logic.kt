@@ -6,6 +6,7 @@ import javafx.scene.Group
 import javafx.scene.Node
 import javafx.scene.control.*
 import javafx.scene.layout.VBox
+import javafx.scene.text.Text
 import javafx.stage.DirectoryChooser
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -13,6 +14,7 @@ import javafx.stage.Window
 import net.ehvazend.mpu.FS_Handler
 import net.ehvazend.mpu.FS_Repository
 import net.ehvazend.mpu.FXML_Animation.Slider
+import net.ehvazend.mpu.HTML_Updater
 import net.ehvazend.mpu.JSON_Handler
 import net.ehvazend.mpu.JSON_Handler.loaderMod
 import net.ehvazend.mpu.data.JSON_DataMod
@@ -85,9 +87,11 @@ open class FXML_Logic : FXML_Annotation() {
                 VBox.children.add(Separator(Orientation.HORIZONTAL))
 
                 for (mod in arrayList) {
-                    VBox.children.add(CheckBox(mod.name).also { it.isSelected = true; it.setOnAction {
+                    VBox.children.add(CheckBox(mod.name).also {
+                        it.isSelected = true; it.setOnAction {
                         mod.state = (it.source as CheckBox).isSelected
-                    } })
+                    }
+                    })
                 }
 
                 VBox.children.add(Separator(Orientation.HORIZONTAL))
@@ -103,7 +107,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_Core, LOADING)
-                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_Core = it; setTitledPane(it, titledPane_Core) }
+                                currentMods_Core = loaderMod(pack.repository, pack.hashName, module = dataModule).also { setTitledPane(it, titledPane_Core) }
                                 refreshState(binding_Core, DISABLE)
                             }
                         }
@@ -118,7 +122,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphics, LOADING)
-                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_ImprovedGraphics = it; setTitledPane(it, titledPane_ImprovedGraphics) }
+                                currentMods_ImprovedGraphics = loaderMod(pack.repository, pack.hashName, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphics) }
                                 refreshState(binding_ImprovedGraphics, DISABLE)
                             }
                         }
@@ -133,7 +137,7 @@ open class FXML_Logic : FXML_Annotation() {
                         dataModule.state -> thread {
                             Platform.runLater {
                                 refreshState(binding_ImprovedGraphicsPlus, LOADING)
-                                loaderMod(pack.repository, pack.hashName, module = dataModule).also { currentMods_ImprovedGraphicsPlus = it; setTitledPane(it, titledPane_ImprovedGraphicsPlus) }
+                                currentMods_ImprovedGraphicsPlus = loaderMod(pack.repository, pack.hashName, module = dataModule).also { setTitledPane(it, titledPane_ImprovedGraphicsPlus) }
                                 refreshState(binding_ImprovedGraphicsPlus, DISABLE)
                             }
                         }
@@ -144,7 +148,7 @@ open class FXML_Logic : FXML_Annotation() {
             }
         }
 
-        for (pack: JSON_DataPack in dataPacks) when(pack.name) {
+        for (pack: JSON_DataPack in dataPacks) when (pack.name) {
             value -> {
                 currentDataPack = pack
                 pack.stateModules.forEach { update(pack, it) }
@@ -164,7 +168,7 @@ open class FXML_Logic : FXML_Annotation() {
             else -> value.STATE = DISABLE
         }
 
-        when(value.STATE) {
+        when (value.STATE) {
             DISABLE -> {
                 value.titledPane.isDisable = true
                 value.titledPane.graphic = null
@@ -239,22 +243,81 @@ open class FXML_Logic : FXML_Annotation() {
         }
     }
 
-    protected fun install(directory: File, catchingMode: Boolean = false, node: TextInputControl? = null) {
+    protected fun install(directory: File, node: TextInputControl? = null) {
         fun concatenationPath(nameFile: String): File {
             return File("$directory\\" + nameFile)
         }
 
-        fun separationPath(path: String): String {
-            return path.replace(directory.toString(), "")
+        fun separationPath(directory_: File, path: String): String {
+            return path.replace(directory_.toString(), "")
         }
 
-        fun catchingValue(value: String, modeShort: Boolean = false) {
-            if (catchingMode && node != null && !modeShort) node.appendText(value + "\n")
-            if (catchingMode && node != null && modeShort) node.appendText(separationPath(value) + "\n")
+        fun textAreaHandler(value: String) {
+            node?.appendText(value + "\n")
         }
 
-        FS_Handler.createDirectory(directory).also { catchingValue(it) }
-        FS_Handler.createFile(concatenationPath("config.json")).also { catchingValue(it, true) }
-        FS_Handler.copyCore(directory).also { catchingValue(it, true) }
+        class ProgressBarHandler {
+            private val installText = ArrayList<Text>().also { it.add(text_ValueOne); it.add(text_ValueSeparator); it.add(text_ValueTwo); }
+            private var stepValue = 0.0
+
+
+            fun start(maxValue: Int) {
+                stepValue = 1.0 / maxValue
+                progressBar_Install.progress = 0.0
+
+                //text_ValueOne
+                installText[0].also { it.text = "0" }
+
+                // text_ValueTwo
+                installText[2].text = maxValue.toString()
+
+                installText.forEach { it.isVisible = true }
+                progressBar_Install.isDisable = false
+            }
+
+            fun increment() {
+                when {
+                    installText[2].text.toInt() == 0 -> println("Text not initialized")
+                    installText[0].text.toInt() == installText[2].text.toInt() -> println("Maximum value")
+                    else -> {
+                        installText[0].also { it.text = it.text.toInt().plus(1).toString() }
+                        progressBar_Install.also { it.progress += stepValue }
+                    }
+                }
+            }
+        }
+
+        fun install_MPU(progressBarHandler: ProgressBarHandler) {
+            progressBarHandler.start(5)
+
+            FS_Handler.createDirectory(directory).also { textAreaHandler(it); progressBarHandler.increment() }
+            FS_Handler.createFile(concatenationPath("config.json")).also { textAreaHandler(separationPath(directory, it)); progressBarHandler.increment() }
+            FS_Handler.copyCore(directory).also { textAreaHandler(separationPath(directory, it)); progressBarHandler.increment() }
+        }
+
+        fun install_Pack(progressBarHandler: ProgressBarHandler) {
+            FS_Handler.createDirectory(File(directory, currentDataPack.hashName)).also { textAreaHandler(separationPath(directory, it)); progressBarHandler.increment() }
+            FS_Handler.createDirectory(File(directory, File(currentDataPack.hashName, "mods").path)).also { textAreaHandler(separationPath(directory, it)); progressBarHandler.increment() }
+        }
+
+        fun install_Mods(progressBarHandler: ProgressBarHandler) {
+            // Loading all mods
+            ArrayList<JSON_DataMod>().also { it_ ->
+                currentMods_Core.filter { it.state }.forEach { it_.add(it) }
+                currentMods_ImprovedGraphics.filter { it.state }.forEach { it_.add(it) }
+                currentMods_ImprovedGraphicsPlus.filter { it.state }.forEach { it_.add(it) }
+
+            }.also { it_ -> progressBarHandler.also { it.start(it_.size) } }.forEach {
+                HTML_Updater.checkMod("https://minecraft.curseforge.com/projects/${it.hashName}/files" + "?filter-game-version=${currentDataPack.hashVersion}").first().also {
+                    FS_Handler.loadingFile(it.link + "/download", directory.path).also { textAreaHandler(separationPath(directory, it.path)); progressBarHandler.increment() }
+                }
+            }
+        }
+
+        ProgressBarHandler().also {
+            install_MPU(it)
+            install_Pack(it)
+            install_Mods(it)
+        }
     }
 }

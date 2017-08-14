@@ -1,29 +1,21 @@
 package net.ehvazend.mpu
 
+import net.ehvazend.mpu.data.HTML_DataModVersion
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
-import org.jsoup.select.Elements
 
 object HTML_Updater {
     // TODO: 27.06.2017 HTML Parser with processing Curse mods
 
     private val rootAddress = "https://minecraft.curseforge.com"
 
-    fun checkMod(URL: String): List<Array<String>> {
-        val list = ArrayList<Array<String>>()
-
-        val page: Document = Jsoup.connect(URL).get()
-        val pageElements: Elements = page.getElementsByAttributeValue("class", "project-file-list-item")
-
-        pageElements.forEach { pageElement: Element ->
-            val pageData: Elements = pageElement.getElementsByAttributeValue("class", "overflow-tip")
-            val pageVersions: Elements = pageElement.getElementsByAttributeValue("class", "version-label")
-
-            list.add(arrayOf(rootAddress + pageData.attr("href"), pageData.attr("data-name"), pageVersions.text()))
+    fun checkMod(URL: String): ArrayList<HTML_DataModVersion> {
+        return ArrayList<HTML_DataModVersion>().also { it_ ->
+            Jsoup.connect(URL).get().getElementsByAttributeValue("class", "project-file-list-item").forEach { pageElement ->
+                pageElement.getElementsByAttributeValue("class", "overflow-tip twitch-link").also {
+                    it_.add(HTML_DataModVersion(rootAddress + it.attr("href"), it.attr("data-name")))
+                }
+            }
         }
-
-        return list
     }
 
     fun updateMod() {

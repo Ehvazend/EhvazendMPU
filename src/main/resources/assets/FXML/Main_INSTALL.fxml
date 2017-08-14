@@ -20,6 +20,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <Pane fx:id="pane_Root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ehvazend.mpu.install.FXML_Controller">
    <children>
@@ -174,8 +175,13 @@
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <ProgressBar disable="true" minHeight="25.0" prefHeight="25.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <Text layoutX="277.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0%" />
+                              <ProgressBar fx:id="progressBar_Install" disable="true" minHeight="25.0" prefHeight="25.0" progress="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TextFlow textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+                                 <children>
+                                    <Text fx:id="text_ValueOne" smooth="false" stroke="#efefef80" strokeLineCap="BUTT" strokeType="OUTSIDE" text="0" visible="false" />
+                                    <Text fx:id="text_ValueSeparator" smooth="false" stroke="#efefef80" strokeLineCap="BUTT" strokeType="OUTSIDE" text="/" visible="false" />
+                                    <Text fx:id="text_ValueTwo" smooth="false" stroke="#efefef80" strokeLineCap="BUTT" strokeType="OUTSIDE" text="0" visible="false" />
+                                 </children></TextFlow>
                            </children>
                         </AnchorPane>
                      </children>
